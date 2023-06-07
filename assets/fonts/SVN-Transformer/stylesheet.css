@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'SVN-Transformer';
+    src: url('SVN-Transformer.eot');
+    src: url('SVN-Transformer.eot?#iefix') format('embedded-opentype'),
+        url('SVN-Transformer.woff2') format('woff2'),
+        url('SVN-Transformer.woff') format('woff'),
+        url('SVN-Transformer.ttf') format('truetype'),
+        url('SVN-Transformer.svg#SVN-Transformer') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
