@@ -177,7 +177,7 @@ img:not([src]) { visibility: hidden; }
 		margin-bottom: 5px;
 	}
 	.menu-page:before { position: absolute; content: ''; background: linear-gradient(180deg, rgba(208, 1, 11, 1) 0%, rgba(241, 19, 30, 1) 50%, rgba(206, 0, 10, 1) 100%); width: calc((50% - 0px)/2); height: 50px; right: 0; top: 0; }
-	.menu-page::after { position: absolute; content: ''; background: linear-gradient(180deg, rgba(218, 147, 3, 1) 0%, rgba(248, 209, 1, 1) 50%, rgba(216, 144, 3, 1) 100%); width: calc((50% - 70px)/2); height: 50px; left: 0; top: 0; }
+	.menu-page::after {position: absolute;content: '';background: linear-gradient(180deg, rgba(218, 147, 3, 1) 0%, rgba(248, 209, 1, 1) 50%, rgba(216, 144, 3, 1) 100%);width: calc((50% - 90px)/2);height: 50px;left: 0;top: 0;}
 	.menu-page.fixed .menu-l { display: none; }
 	.menu-left:hover .menu-l { display: block; transition: all 1s ease-in-out; }
 	.menu-left .menu-l { position: absolute; left: 0px; top: 100%; width: 100%; background: #000; box-shadow: rgba(0, 0, 0, 0.09) 0px 0px 5px; }

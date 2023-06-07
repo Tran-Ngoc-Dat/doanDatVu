@@ -1,4 +1,3 @@
-<!-- Tesst -->
 <?php if (!empty($partner)) { ?>
 
 	<div class="wrap-partner">

@@ -2,7 +2,7 @@
 	$config = array(
 		'database' => array(
 			'server-name' => $_SERVER["SERVER_NAME"],
-			'url' => '/phutungoto/',
+			'url' => '/Doan/doanDatVu/',
 			'type' => 'mysql',
 			'host' => 'localhost',
 			'username' => 'root',
