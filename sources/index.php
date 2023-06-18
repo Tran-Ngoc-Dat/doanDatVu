@@ -16,4 +16,8 @@ $promotion = $d->rawQuery("select name, photo, slug, id, regular_price, sale_pri
 $newsnb = $d->rawQuery("select name, photo, slug, id, date_created, description from #_news where type = 'tin-tuc' order by id desc");
     // $question = $d->rawQuery("select name, photo, slug, id, date_created from #_news where type = 'cau-hoi' and find_in_set('hienthi',status) order by id desc");
 
+
+$productlist = $d->rawQuery("select name,id,slug from category");
+$newdv = $d->rawQuery("select name, photo, slug, id, date_created, description from #_news where type = 'dich-vu' order by id desc");
+
 ?>
