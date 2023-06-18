@@ -21,6 +21,5 @@
       include TEMPLATE.LAYOUT."footer.php";
       include TEMPLATE.LAYOUT."js.php";
    ?>
-   <?php echo "124" ?>
 </body>
 </html>
