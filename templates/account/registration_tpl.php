@@ -4,7 +4,7 @@
             
         </div>
         <?=$flash->getMessages("frontend")?>
-        <form action="" method="post" class="register-form">
+        <form action="" method="post" style="padding: 25px;">
             <div class="form-group mb-3">
             
             <label class="label" for="name">Tên tài khoản *</label>

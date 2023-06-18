@@ -56,14 +56,6 @@
 
                 </div>
                 <div class="footer-news col-2">
-                    <h2 class="footer-title">Chính sách</h2>
-                    <ul class="footer-ul">
-                        <?php foreach ($policy as $v) { ?>
-                            <li><a href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a></li>
-                        <?php } ?>
-                    </ul>
-                </div>
-                <div class="footer-news col-2">
                     <h2 class="footer-title">Danh mục</h2>
                     <ul class="footer-ul">
                         <li><a href="gioi-thieu" title="Giới thiệu">Giới thiệu</a></li>

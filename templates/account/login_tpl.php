@@ -16,7 +16,7 @@
             <span>ĐĂNG NHẬP</span>
             
         </div>
-        <form action="" name="login-user" method="post" class="login-form">
+        <form action="" name="login-user" method="post" style="padding: 25px;">
             <div class="form-group mb-3">
             
             <label class="label" for="name">Tên tài khoản hoặc địa chỉ email *</label>
