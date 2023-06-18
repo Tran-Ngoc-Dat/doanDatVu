@@ -3001,9 +3001,8 @@ textarea.form-control-lg {
 }
 
 .btn-success:hover {
-    color: #fff;
-    background-color: #157347;
-    border-color: #146c43
+    background-color: var(--second-color);
+    border-color: var(--second-color);
 }
 
 .btn-check:focus+.btn-success,.btn-success:focus {
@@ -5612,7 +5611,7 @@ textarea.form-control-lg {
     flex-wrap: wrap;
     flex-shrink: 0;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: .75rem;
     border-top: 1px solid #dee2e6;
     border-bottom-right-radius: calc(.3rem - 1px);
