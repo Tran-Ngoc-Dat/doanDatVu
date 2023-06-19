@@ -894,7 +894,11 @@ coccocgrammar { display: none; }
 .input-user { margin-bottom: 0.75rem; } 
 .input-user input { font-size: 14px; } 
 .button-user {/* margin-bottom: 1rem; */} 
-.button-user input { background: #000; border-color: #000; line-height: initial; text-transform: capitalize; } 
+.button-user input {background: #000;border-color: #000;line-height: initial;text-transform: capitalize;padding: 10px 20px;border-radius: 5px !important;}
+
+.button-user input:hover {
+    background: var(--main-color);
+} 
 .button-user input { font-size: 14px; } 
 .checkbox-user,
 .radio-user { cursor: pointer; } 

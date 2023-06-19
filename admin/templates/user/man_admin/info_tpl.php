@@ -8,7 +8,7 @@
 		$changepass = '';
 	}
 
-	$linkSave = "index.php?com=user&act=info_admin".$changepass;
+	$linkSave = "index.php?source=user&act=info_admin".$changepass;
 ?>
 <!-- Content Header -->
 <section class="content-header text-sm">

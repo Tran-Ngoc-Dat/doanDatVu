@@ -1,6 +1,6 @@
 <?php
-    $linkMan = "index.php?com=user&act=man_member";
-    $linkSave = "index.php?com=user&act=save_member";
+    $linkMan = "index.php?source=user&act=man_member";
+    $linkSave = "index.php?source=user&act=save_member";
 ?>
 <!-- Content Header -->
 <section class="content-header text-sm">

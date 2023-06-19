@@ -25,7 +25,6 @@
 		$where = "id <> ? and id_category = ? and find_in_set('hienthi',status)";
 		$params = array($id,$rowDetail['id_category']);
 		$sql = "select * from #_product where $where order by id desc $limit";
-		$product = $d->rawQuery($sql,$params);
 
 		$breadCumb = array($titleMain,$productList['name'],$rowDetail['name']);
 	} elseif ($idl!=''){
@@ -35,8 +34,7 @@
 		$where = "";
 		$where = " id_category = ? and find_in_set('hienthi',status)";
 		$params = array($idl);
-		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
-		$product = $d->rawQuery($sql,$params);
+		
 		$breadCumb = array($titleMain,$productList['name']);
 	} else {
 		$breadCumb = array($titleMain);
@@ -46,8 +44,20 @@
 		if($com == 'san-pham-ban-chay'){
 			$where .= " and find_in_set('banchay',status)";
 		}
-		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
-		$product = $d->rawQuery($sql,$params);
+		// $sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where order by id desc";
+		// $product = $d->rawQuery($sql,$params);
+
+		$curPage = $getPage;
+		$perPage = 16;
+		$startpoint = ($curPage * $perPage) - $perPage;
+		$limit = " limit " . $startpoint . "," . $perPage;
+		$sql = "select photo, name, slug, sale_price, regular_price, discount, id from #_product where $where $order $limit";
+		$product = $d->rawQuery($sql, $params);
+		$sqlNum = "select count(*) as 'num' from #_product where $where order by date_created desc";
+		$count = $d->rawQueryOne($sqlNum, $params);
+		$total = (!empty($count)) ? $count['num'] : 0;
+		$url = $func->getCurrentPageURL();
+		$paging = $func->pagination($total, $perPage, $curPage, $url);
 
 		$minPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price asc");
 		$maxPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price desc");
