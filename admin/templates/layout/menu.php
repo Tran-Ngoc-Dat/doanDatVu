@@ -123,6 +123,48 @@
                         <?php } ?>
                     </ul>
                 </li>
+
+                <!-- User -->
+                
+                    <li class="nav-item has-treeview <?= $menuopen ?> <?= $none ?>">
+                        <a class="nav-link <?= $active ?>" href="#" title="Quản lý user">
+                            <i class="nav-icon text-sm fas fa-users"></i>
+                            <p>
+                                Quản lý user
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <?php if (isset($config['permission']['active']) && $config['permission']['active'] == true) {
+                                $active = "";
+                                if ($act == 'permission_group' || $act == 'add_permission_group' || $act == 'edit_permission_group') $active = "active"; ?>
+                                <li class="nav-item"><a class="nav-link <?= $active ?>" href="index.php?source=user&act=permission_group" title="Nhóm quyền"><i class="nav-icon text-sm far fa-caret-square-right"></i>
+                                        <p>Nhóm quyền</p>
+                                    </a></li>
+                            <?php } ?>
+                            <?php
+                            $active = "";
+                            if ($act == 'info_admin') $active = "active";
+                            ?>
+                            <li class="nav-item"><a class="nav-link <?= $active ?>" href="index.php?source=user&act=info_admin" title="Thông tin admin"><i class="nav-icon text-sm far fa-caret-square-right"></i>
+                                    <p>Thông tin admin</p>
+                                </a></li>
+                            <?php if (isset($config['user']['admin']) && $config['user']['admin'] == true) {
+                                $active = "";
+                                if ($act == 'man_admin' || $act == 'add_admin' || $act == 'edit_admin') $active = "active"; ?>
+                                <li class="nav-item"><a class="nav-link <?= $active ?>" href="index.php?source=user&act=man_admin" title="Tài khoản admin"><i class="nav-icon text-sm far fa-caret-square-right"></i>
+                                        <p>Tài khoản admin</p>
+                                    </a></li>
+                            <?php } ?>
+                            <?php if (isset($config['user']['member']) && $config['user']['member'] == true) {
+                                $active = "";
+                                if ($com == 'user' && ($act == 'man_member' || $act == 'add_member' || $act == 'edit_member')) $active = "active"; ?>
+                                <li class="nav-item"><a class="nav-link <?= $active ?>" href="index.php?source=user&act=man_member" title="Tài khoản khách"><i class="nav-icon text-sm far fa-caret-square-right"></i>
+                                        <p>Tài khoản khách</p>
+                                    </a></li>
+                            <?php } ?>
+                        </ul>
+                    </li>
                 <!-- Thiết lập thông tin -->
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?source=setting&act=update" title="Thiết lập thông tin">

@@ -95,7 +95,7 @@
 		$sqlNum = "select count(*) as 'num' from #_permission_group where id<>0 $where order by numb,id desc";
 		$count = $d->rawQueryOne($sqlNum);
 		$total = (!empty($count)) ? $count['num'] : 0;
-		$url = "index.php?com=user&act=permission_group";
+		$url = "index.php?source=user&act=permission_group";
 		$paging = $func->pagination($total,$perPage,$curPage,$url);
 	}
 
@@ -113,7 +113,7 @@
 
 			if(empty($item))
 			{
-				$func->transfer("Nhóm quyền này không tồn tại", "index.php?com=user&act=permission_group&p=".$curPage, false);
+				$func->transfer("Nhóm quyền này không tồn tại", "index.php?source=user&act=permission_group&p=".$curPage, false);
 			}
 
 			/* Lấy quyền */
@@ -133,7 +133,7 @@
 		}
 		else
 		{
-			$func->transfer("Nhóm quyền này không tồn tại", "index.php?com=user&act=permission_group&p=".$curPage, false);
+			$func->transfer("Nhóm quyền này không tồn tại", "index.php?source=user&act=permission_group&p=".$curPage, false);
 		}
 	}
 
@@ -171,13 +171,13 @@
 			$row = $d->rawQueryOne("select id from #_permission_group where id = ? limit 0,1",array($id));
 			if(empty($row))
 			{
-				$func->transfer("Nhóm quyền này không tồn tại", "index.php?com=user&act=permission_group&p=".$curPage, false);
+				$func->transfer("Nhóm quyền này không tồn tại", "index.php?source=user&act=permission_group&p=".$curPage, false);
 			}
 
 			/* Xử lý tham số bắt buộc */
 			if(empty($_POST['dataPermission']))
 			{
-				$func->transfer("Vui lòng chọn quyền cho nhóm này", "index.php?com=user&act=edit_permission_group&id=".$id."&p=".$curPage, false);
+				$func->transfer("Vui lòng chọn quyền cho nhóm này", "index.php?source=user&act=edit_permission_group&id=".$id."&p=".$curPage, false);
 			}
 
 			/* Cập nhật thông tin nhóm quyền */
@@ -198,11 +198,11 @@
 					$d->insert('permission',$data_permission);
 				}
 
-				$func->transfer("Cập nhật nhóm quyền thành công", "index.php?com=user&act=permission_group&p=".$curPage);
+				$func->transfer("Cập nhật nhóm quyền thành công", "index.php?source=user&act=permission_group&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Cập nhật nhóm quyền thất bại", "index.php?com=user&act=permission_group&p=".$curPage);
+				$func->transfer("Cập nhật nhóm quyền thất bại", "index.php?source=user&act=permission_group&p=".$curPage);
 			}
 		}
 		else
@@ -210,7 +210,7 @@
 			/* Xử lý tham số bắt buộc */
 			if(empty($_POST['dataPermission']))
 			{
-				$func->transfer("Vui lòng chọn quyền cho nhóm này", "index.php?com=user&act=add_permission_group&p=".$curPage, false);
+				$func->transfer("Vui lòng chọn quyền cho nhóm này", "index.php?source=user&act=add_permission_group&p=".$curPage, false);
 			}
 
 			/* Lưu thông tin nhóm quyền */
@@ -229,11 +229,11 @@
 					$d->insert('permission',$data_permission);
 				}
 
-				$func->transfer("Tạo nhóm quyền thành công", "index.php?com=user&act=permission_group&p=".$curPage);
+				$func->transfer("Tạo nhóm quyền thành công", "index.php?source=user&act=permission_group&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Tạo nhóm quyền thất bại", "index.php?com=user&act=permission_group&p=".$curPage);
+				$func->transfer("Tạo nhóm quyền thất bại", "index.php?source=user&act=permission_group&p=".$curPage);
 			}
 		}
 	}
@@ -263,11 +263,11 @@
 					$d->update('user',$data_user);
 				}
 
-				$func->transfer("Xóa dữ liệu thành công", "index.php?com=user&act=permission_group&p=".$curPage);
+				$func->transfer("Xóa dữ liệu thành công", "index.php?source=user&act=permission_group&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=user&act=permission_group&p=".$curPage, false);
+				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=user&act=permission_group&p=".$curPage, false);
 			}
 		}
 		elseif(isset($_GET['listid']))
@@ -295,11 +295,11 @@
 				}
 			}
 
-			$func->transfer("Xóa dữ liệu thành công", "index.php?com=user&act=permission_group&p=".$curPage);
+			$func->transfer("Xóa dữ liệu thành công", "index.php?source=user&act=permission_group&p=".$curPage);
 		} 
 		else
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=permission_group&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=user&act=permission_group&p=".$curPage, false);
 		}
 	}
 
@@ -324,7 +324,7 @@
 		$sqlNum = "select count(*) as 'num' from #_user where id <> 0 and role = 1 $where order by numb,id desc";
 		$count = $d->rawQueryOne($sqlNum);
 		$total = (!empty($count)) ? $count['num'] : 0;
-		$url = "index.php?com=user&act=man_admin";
+		$url = "index.php?source=user&act=man_admin";
 		$paging = $func->pagination($total,$perPage,$curPage,$url);
 	}
 
@@ -337,7 +337,7 @@
 
 		if(empty($id))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man_admin&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=user&act=man_admin&p=".$curPage, false);
 		}
 		else
 		{
@@ -345,7 +345,7 @@
 
 			if(empty($item))
 			{
-				$func->transfer("Dữ liệu không có thực", "index.php?com=user&act=man_admin&p=".$curPage, false);
+				$func->transfer("Dữ liệu không có thực", "index.php?source=user&act=man_admin&p=".$curPage, false);
 			}
 		}
 	}
@@ -427,7 +427,7 @@
 					$response['status'] = 'danger';
 					$message = base64_encode(json_encode($response));
 					$flash->set('message', $message);
-					$func->redirect("index.php?com=user&act=info_admin&changepass=1");
+					$func->redirect("index.php?source=user&act=info_admin&changepass=1");
 				}
 
 				/* Change to new password */
@@ -524,7 +524,7 @@
 					$response['status'] = 'danger';
 					$message = base64_encode(json_encode($response));
 					$flash->set('message', $message);
-					$func->redirect("index.php?com=user&act=info_admin");
+					$func->redirect("index.php?source=user&act=info_admin");
 				}
 			}
 			
@@ -539,11 +539,11 @@
 					$func->transfer("Cập nhật dữ liệu thành công","index.php");	
 				}
 
-				$func->transfer("Cập nhật dữ liệu thành công","index.php?com=user&act=info_admin");
+				$func->transfer("Cập nhật dữ liệu thành công","index.php?source=user&act=info_admin");
 			}
 			else
 			{
-				$func->transfer("Cập nhật dữ liệu bị lỗi","index.php?com=user&act=info_admin");
+				$func->transfer("Cập nhật dữ liệu bị lỗi","index.php?source=user&act=info_admin");
 			}
 		}
 		
@@ -558,7 +558,7 @@
 		/* Check post */
 		if(empty($_POST))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man_admin&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=user&act=man_admin&p=".$curPage, false);
 		}
 
 		/* Post dữ liệu */
@@ -700,11 +700,11 @@
 
 			if(empty($id))
 			{
-				$func->redirect("index.php?com=user&act=add_admin");
+				$func->redirect("index.php?source=user&act=add_admin");
 			}
 			else
 			{
-				$func->redirect("index.php?com=user&act=edit_admin&id=".$id);
+				$func->redirect("index.php?source=user&act=edit_admin&id=".$id);
 			}
 		}
 
@@ -717,7 +717,7 @@
 
 				if(!empty($row))
 				{
-					$func->transfer("Bạn không có quyền trên tài khoản này. Mọi thắc mắc xin liên hệ quản trị website", "index.php?com=user&act=man_admin&p=".$curPage, false);
+					$func->transfer("Bạn không có quyền trên tài khoản này. Mọi thắc mắc xin liên hệ quản trị website", "index.php?source=user&act=man_admin&p=".$curPage, false);
 				}
 			}
 			
@@ -735,11 +735,11 @@
 			$d->where('id', $id);
 			if($d->update('user',$data))
 			{
-				$func->transfer("Cập nhật dữ liệu thành công", "index.php?com=user&act=man_admin&p=".$curPage);
+				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=user&act=man_admin&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=man_admin&p=".$curPage, false);
+				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?source=user&act=man_admin&p=".$curPage, false);
 			}
 		}
 		else
@@ -751,11 +751,11 @@
 			
 			if($d->insert('user',$data))
 			{
-				$func->transfer("Lưu dữ liệu thành công", "index.php?com=user&act=man_admin&p=".$curPage);
+				$func->transfer("Lưu dữ liệu thành công", "index.php?source=user&act=man_admin&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=user&act=man_admin", false);
+				$func->transfer("Lưu dữ liệu bị lỗi", "index.php?source=user&act=man_admin", false);
 			}
 		}
 	}
@@ -774,11 +774,11 @@
 			if(!empty($row['id']))
 			{
 				$d->rawQuery("delete from #_user where id = ? and role = 1",array($id));
-				$func->transfer("Xóa dữ liệu thành công", "index.php?com=user&act=man_admin&p=".$curPage);
+				$func->transfer("Xóa dữ liệu thành công", "index.php?source=user&act=man_admin&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=user&act=man_admin&p=".$curPage, false);
+				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=user&act=man_admin&p=".$curPage, false);
 			}
 		}
 		elseif(isset($_GET['listid']))
@@ -796,11 +796,11 @@
 				}
 			}
 
-			$func->transfer("Xóa dữ liệu thành công","index.php?com=user&act=man_admin&p=".$curPage);
+			$func->transfer("Xóa dữ liệu thành công","index.php?source=user&act=man_admin&p=".$curPage);
 		}
 		else
 		{
-			$func->transfer("Không nhận được dữ liệu","index.php?com=user&act=man_admin&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu","index.php?source=user&act=man_admin&p=".$curPage, false);
 		}
 	}
 
@@ -811,7 +811,7 @@
 
 		/* Hủy bỏ login */
 		unset($_SESSION[$loginAdmin]);
-		$func->redirect("index.php?com=user&act=login");
+		$func->redirect("index.php?source=user&act=login");
 	}
 
 	/* View member */
@@ -835,7 +835,7 @@
 		$sqlNum = "select count(*) as 'num' from #_member where id <> 0 $where order by numb,id desc";
 		$count = $d->rawQueryOne($sqlNum);
 		$total = (!empty($count)) ? $count['num'] : 0;
-		$url = "index.php?com=user&act=man_member";
+		$url = "index.php?source=user&act=man_member";
 		$paging = $func->pagination($total,$perPage,$curPage,$url);
 	}
 
@@ -848,7 +848,7 @@
 
 		if(empty($id))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man_member&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=user&act=man_member&p=".$curPage, false);
 		}
 		else
 		{
@@ -856,7 +856,7 @@
 
 			if(empty($item))
 			{
-				$func->transfer("Dữ liệu không có thực", "index.php?com=user&act=man_member&p=".$curPage, false);
+				$func->transfer("Dữ liệu không có thực", "index.php?source=user&act=man_member&p=".$curPage, false);
 			}
 		}
 	}
@@ -869,7 +869,7 @@
 		/* Check post */
 		if(empty($_POST))
 		{
-			$func->transfer("Không nhận được dữ liệu", "index.php?com=user&act=man_member&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu", "index.php?source=user&act=man_member&p=".$curPage, false);
 		}
 
 		/* Post dữ liệu */
@@ -1005,11 +1005,11 @@
 
 			if(empty($id))
 			{
-				$func->redirect("index.php?com=user&act=add_member");
+				$func->redirect("index.php?source=user&act=add_member");
 			}
 			else
 			{
-				$func->redirect("index.php?com=user&act=edit_member&id=".$id);
+				$func->redirect("index.php?source=user&act=edit_member&id=".$id);
 			}
 		}
 
@@ -1022,7 +1022,7 @@
 
 				if(!empty($row))
 				{
-					$func->transfer("Bạn không có quyền trên tài khoản này. Mọi thắc mắc xin liên hệ quản trị website", "index.php?com=user&act=man_member&p=".$curPage, false);
+					$func->transfer("Bạn không có quyền trên tài khoản này. Mọi thắc mắc xin liên hệ quản trị website", "index.php?source=user&act=man_member&p=".$curPage, false);
 				}
 			}
 			
@@ -1040,11 +1040,11 @@
 			$d->where('id', $id);
 			if($d->update('member',$data))
 			{
-				$func->transfer("Cập nhật dữ liệu thành công", "index.php?com=user&act=man_member&p=".$curPage);
+				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=user&act=man_member&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?com=user&act=man_member&p=".$curPage, false);
+				$func->transfer("Cập nhật dữ liệu bị lỗi", "index.php?source=user&act=man_member&p=".$curPage, false);
 			}
 		}
 		else
@@ -1056,11 +1056,11 @@
 			
 			if($d->insert('member',$data))
 			{
-				$func->transfer("Lưu dữ liệu thành công", "index.php?com=user&act=man_member&p=".$curPage);
+				$func->transfer("Lưu dữ liệu thành công", "index.php?source=user&act=man_member&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Lưu dữ liệu bị lỗi", "index.php?com=user&act=man_member&p=".$curPage, false);
+				$func->transfer("Lưu dữ liệu bị lỗi", "index.php?source=user&act=man_member&p=".$curPage, false);
 			}
 		}
 	}
@@ -1079,11 +1079,11 @@
 			if(!empty($row['id']))
 			{
 				$d->rawQuery("delete from #_member where id = ?",array($id));
-				$func->transfer("Xóa dữ liệu thành công", "index.php?com=user&act=man_member&p=".$curPage);
+				$func->transfer("Xóa dữ liệu thành công", "index.php?source=user&act=man_member&p=".$curPage);
 			}
 			else
 			{
-				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?com=user&act=man_member&p=".$curPage, false);
+				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=user&act=man_member&p=".$curPage, false);
 			}
 		}
 		elseif(isset($_GET['listid']))
@@ -1101,11 +1101,11 @@
 				}
 			}
 
-			$func->transfer("Xóa dữ liệu thành công","index.php?com=user&act=man_member&p=".$curPage);
+			$func->transfer("Xóa dữ liệu thành công","index.php?source=user&act=man_member&p=".$curPage);
 		}
 		else
 		{
-			$func->transfer("Không nhận được dữ liệu","index.php?com=user&act=man_member&p=".$curPage, false);
+			$func->transfer("Không nhận được dữ liệu","index.php?source=user&act=man_member&p=".$curPage, false);
 		}
 	}
 ?>

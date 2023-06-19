@@ -1,8 +1,8 @@
 <?php
-	$linkMan = "index.php?com=user&act=man_member";
-    $linkAdd = "index.php?com=user&act=add_member";
-	$linkEdit = "index.php?com=user&act=edit_member";
-	$linkDelete = "index.php?com=user&act=delete_member";
+	$linkMan = "index.php?source=user&act=man_member";
+    $linkAdd = "index.php?source=user&act=add_member";
+	$linkEdit = "index.php?source=user&act=edit_member";
+	$linkDelete = "index.php?source=user&act=delete_member";
 ?>
 
 <!-- Content Header -->

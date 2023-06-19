@@ -18,4 +18,16 @@
     $config['setting']['coords'] = true;
     $config['setting']['coords_iframe'] = true;
     $config['setting']['name'] = true;
+
+    /* Quản lý tài khoản */
+
+$config['user']['active'] = true;
+
+$config['user']['admin'] = true;
+
+$config['user']['check_admin'] = array("hienthi" => "Kích hoạt");
+
+$config['user']['member'] = true;
+
+$config['user']['check_member'] = array("hienthi" => "Kích hoạt");
 ?>

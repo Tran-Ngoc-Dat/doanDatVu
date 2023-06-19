@@ -16,6 +16,7 @@ $(document).ready(function () {
 		slidesToScroll: 1,
 		arrows: false,
 		fade: false,
+		autoplay:true,
 	});
 	$('.slick-bestseller').slick({
 		slidesToShow: 6,
@@ -58,6 +59,7 @@ $(document).ready(function () {
 		slidesToScroll: 1,
 		arrows: false,
 		fade: false,
+		autoplay:true,
 	});
 
 

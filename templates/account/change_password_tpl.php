@@ -27,15 +27,18 @@
         <?= $flash->getMessages("frontend") ?>
         <label>Mật khẩu cũ</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password-old" name="password-old" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password-old" name="password-old" placeholder="Nhập mật khẩu cũ của bạn" value="" required>
+            <div class="invalid-feedback">Nhập mật khẩu cũ của bạn</div> 
         </div>
         <label>Mật khẩu mới</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password-new" name="password-new" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password-new" name="password-new" placeholder="Nhập mật khẩu mới của bạn" value="" required>
+            <div class="invalid-feedback">Nhập mật khẩu mới của bạn</div> 
         </div>
         <label>Nhập lại mật khẩu mới</label>
         <div class="input-group input-user">
-            <input type="password" class="form-control text-sm" id="password" name="password" placeholder="" value="" required>
+            <input type="password" class="form-control text-sm" id="password" name="password" placeholder="Nhập mật khẩu mới của bạn" value="" required>
+            <div class="invalid-feedback">Nhập mật khẩu mới của bạn</div> 
         </div>
         <div class="button-user">
             <input type="submit" class="btn btn-primary btn-block" name="change_password" value="Cập nhật">
