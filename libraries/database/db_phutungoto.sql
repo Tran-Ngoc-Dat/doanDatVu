@@ -25,6 +25,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `id_user` int(11) DEFAULT 0,
+  `id_product` int(11) DEFAULT 0,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_comment` int(11) DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+
+--
 -- Cấu trúc bảng cho bảng `category`
 --
 
@@ -356,6 +370,19 @@ INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `phone`, `email`, 
 -- Chỉ mục cho các bảng đã đổ
 --
 
+-- Chỉ mục cho bảng `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `comment`
+  ADD FOREIGN KEY(`id_user`) 
+  REFERENCES `user`(`id`);
+
+ALTER TABLE `comment`
+  ADD FOREIGN KEY(`id_product`) 
+  REFERENCES `product`(`id`);
+
 --
 -- Chỉ mục cho bảng `category`
 --
@@ -368,13 +395,21 @@ ALTER TABLE `category`
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `contact`
+  ADD FOREIGN KEY(`id_user`) 
+  REFERENCES `user`(`id`);
 --
+
 -- Chỉ mục cho bảng `gallery`
 --
 ALTER TABLE `gallery`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `gallery`
+  ADD FOREIGN KEY(`id_product`) 
+  REFERENCES `product`(`id`);
 --
+
 -- Chỉ mục cho bảng `multi_media`
 --
 ALTER TABLE `multi_media`
@@ -392,17 +427,32 @@ ALTER TABLE `news`
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `order`
+  ADD FOREIGN KEY(`id_user`) 
+  REFERENCES `user`(`id`);
+
 --
 -- Chỉ mục cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
   ADD PRIMARY KEY (`id`);
+  
+ALTER TABLE `order_detail`
+  ADD FOREIGN KEY(`id_order`)
+  REFERENCES `order`(`id`);
+ALTER TABLE `order_detail`
+  ADD FOREIGN KEY(`id_product`) 
+  REFERENCES `product`(`id`);
 
 --
 -- Chỉ mục cho bảng `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `product`
+  ADD FOREIGN KEY(`id_category`)
+  REFERENCES `category`(`id`);
 
 --
 -- Chỉ mục cho bảng `setting`
@@ -419,6 +469,11 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
+
+-- AUTO_INCREMENT cho bảng `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `category`
