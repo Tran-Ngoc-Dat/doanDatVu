@@ -10,7 +10,7 @@
     $config['news'][$nametype]['check'] = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
     $config['news'][$nametype]['images'] = true;
     $config['news'][$nametype]['show_images'] = true;;
-    $config['news'][$nametype]['desc'] = false;
+    $config['news'][$nametype]['desc'] = true;
     $config['news'][$nametype]['desc_cke'] = false;
     $config['news'][$nametype]['content'] = true;
     $config['news'][$nametype]['content_cke'] = true;
@@ -36,6 +36,18 @@
     $config['news'][$nametype]['width'] = 270;
     $config['news'][$nametype]['height'] = 270;
     $config['news'][$nametype]['thumb'] = '100x100x1';
+    $config['news'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif';
+
+    /* Tiêu chí */
+    $nametype = "tieu-chi";
+    $config['news'][$nametype]['title_main'] = "Tiêu chí";
+    $config['news'][$nametype]['check'] = array("hienthi" => "Hiển thị");
+    $config['news'][$nametype]['images'] = true;
+    $config['news'][$nametype]['show_images'] = true;
+    $config['news'][$nametype]['desc'] = true;
+    $config['news'][$nametype]['width'] = 40;
+    $config['news'][$nametype]['height'] = 40;
+    $config['news'][$nametype]['thumb'] = '40x40x1';
     $config['news'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif';
 
     /* Dịch vụ */

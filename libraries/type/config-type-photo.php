@@ -9,6 +9,26 @@
     $config['photo']['photo_static'][$nametype]['thumb'] = '120x100x1';
     $config['photo']['photo_static'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif';
 
+    /* Ảnh giới thiệu */
+    $nametype = "img-gt";
+    $config['photo']['photo_static'][$nametype]['title_main'] = "Ảnh giới thiệu";
+    $config['photo']['photo_static'][$nametype]['check'] = array("hienthi" => "Hiển thị");
+    $config['photo']['photo_static'][$nametype]['images'] = true;
+    $config['photo']['photo_static'][$nametype]['width'] = 465;
+    $config['photo']['photo_static'][$nametype]['height'] = 350;
+    $config['photo']['photo_static'][$nametype]['thumb'] = '465x350x1';
+    $config['photo']['photo_static'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif';
+
+    /* Ảnh tiêu chí */
+    $nametype = "img-tc";
+    $config['photo']['photo_static'][$nametype]['title_main'] = "Ảnh tiêu chí";
+    $config['photo']['photo_static'][$nametype]['check'] = array("hienthi" => "Hiển thị");
+    $config['photo']['photo_static'][$nametype]['images'] = true;
+    $config['photo']['photo_static'][$nametype]['width'] = 825;
+    $config['photo']['photo_static'][$nametype]['height'] = 200;
+    $config['photo']['photo_static'][$nametype]['thumb'] = '825x200x1';
+    $config['photo']['photo_static'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif';
+
     /* Slideshow */
     $nametype = "slide";
     $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Slideshow";
@@ -58,21 +78,6 @@
     $config['photo']['man_photo'][$nametype]['thumb_photo'] = '175x100x2';
     $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif';
 
-    /* Tiêu chí */
-    $nametype = "tieuchi";
-    $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Tiêu chí";
-    $config['photo']['man_photo'][$nametype]['check_photo'] = array("hienthi" => "Hiển thị");
-    $config['photo']['man_photo'][$nametype]['number_photo'] = 5;
-    $config['photo']['man_photo'][$nametype]['images_photo'] = true;
-    $config['photo']['man_photo'][$nametype]['avatar_photo'] = true;
-    $config['photo']['man_photo'][$nametype]['link_photo'] = true;
-    $config['photo']['man_photo'][$nametype]['name_photo'] = true;
-    $config['photo']['man_photo'][$nametype]['desc_photo'] = true;
-    $config['photo']['man_photo'][$nametype]['width_photo'] = 80;
-    $config['photo']['man_photo'][$nametype]['height_photo'] = 80;
-    $config['photo']['man_photo'][$nametype]['thumb_photo'] = '80x80x2';
-    $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif';
-    
     /* Banner quảng cáo */
     $nametype = "advertise";
     $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Banner quảng cáo";

@@ -79,32 +79,6 @@
 		{
 			$response['messages'][] = 'Email không hợp lệ';
 		}
-
-		if(empty($option['hotline']))
-		{
-			$response['messages'][] = 'Hotline không được trống';
-		}
-
-		if(!empty($option['hotline']) && !$func->isPhone($option['hotline']))
-		{
-			$response['messages'][] = 'Hotline không hợp lệ';
-		}
-
-		if(empty($option['phone']))
-		{
-			$response['messages'][] = 'Số điện thoại không được trống';
-		}
-
-		if(!empty($option['phone']) && !$func->isPhone($option['phone']))
-		{
-			$response['messages'][] = 'Số điện thoại không hợp lệ';
-		}
-
-		if(!empty($option['zalo']) && !$func->isPhone($option['zalo']))
-		{
-			$response['messages'][] = 'Zalo không hợp lệ';
-		}
-
 		if(empty($option['website']))
 		{
 			$response['messages'][] = 'Website không được trống';
