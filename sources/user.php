@@ -172,9 +172,8 @@ function loginMember()
 
 function signupMember()
 {
-    global $d, $func, $flash, $configBase;
-
-
+    global $d, $func, $flash, $configBase, $config,$type;
+   
     /* Data */
     $message = '';
     $response = array();
@@ -186,6 +185,9 @@ function signupMember()
     $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
     $phone = (!empty($_POST['phone'])) ? htmlspecialchars($_POST['phone']) : 0;
     $address = (!empty($_POST['address'])) ? htmlspecialchars($_POST['address']) : '';
+    $birthday = (!empty($_POST['birthday'])) ? htmlspecialchars($_POST['birthday']) : '';
+    $file_name = $func->uploadName($_FILES['file']["name"]);
+    $photo = $func->uploadImage("file", $config['user'][$type]['img_type'], "../upload/user/", $file_name);
 
     /* Valid data */
     
@@ -220,7 +222,6 @@ function signupMember()
     if (!empty($phone) && !$func->isPhone($phone)) {
         $response['messages'][] = 'Số điện thoại không hợp lệ';
     }
-    var_dump($_POST);
     
     if (!empty($response)) {
         /* Flash data */
@@ -244,7 +245,8 @@ function signupMember()
     $data['email'] = $email;
     $data['phone'] = $phone;
     $data['address'] = $address;
-    $data['status'] = '';
+    $data['birthday'] = $birthday;
+    $data['status'] = 1;
     $data['role'] = 0;
     if ($d->insert('user', $data)) {
         $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
@@ -315,4 +317,10 @@ function changepassword()
         $func->transfer("Trang không tồn tại", $configBase, false);
     }
     
+}
+
+//Send mail 
+function sendMail()
+{
+
 }

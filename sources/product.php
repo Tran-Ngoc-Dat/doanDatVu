@@ -12,7 +12,8 @@
 		/* Lấy danh mục sản phẩm */
 		$productList = $d->rawQueryOne("select * from category where id = ? and find_in_set('hienthi',status) limit 0,1",array($rowDetail['id_category']));
 
-
+		/* Lấy danh sách comment*/
+		$commentList = $d->rawQuery("select * from comment where id_product = ?",array($rowDetail['id']));
 		/* Cập nhật lượt xem */
 		$views = array();
 		$views['view'] = $rowDetail['view'] + 1;
@@ -62,4 +63,22 @@
 		$minPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price asc");
 		$maxPrice = $d->rawQueryOne("select sale_price from #_product where id<>0 order by sale_price desc");
 	}
+
+	if ($_POST['comment_product'] != "") {
+		if ($_SESSION[$loginMember]['active'] == true) {
+			$contentcomment = (!empty($_POST['comment_product']) ? $_POST['comment_product'] : ""); 
+			$dcomment['id_product'] = $rowDetail['id'];
+			$dcomment['id_user'] = $_SESSION[$loginMember]['id'];
+			$dcomment['content'] = $contentcomment;
+			$dcomment['date_comment'] = time();
+			if($d->insert('comment',$dcomment))
+			{
+				$func->transfer("Cám ơn bạn đã phản hồi", $configBase.$rowDetail['slug']);
+			} else {
+				$func->transfer("Hệ thống đang gặp lỗi.", $configBase.$rowDetail['slug']);
+			}
+		} else {
+			$func->transfer("Bạn vui lòng đăng nhập", $configBase."account/dang-nhap", false);
+		}
+	} 
 ?>

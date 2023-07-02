@@ -319,9 +319,9 @@
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;
 		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select * from #_user where id <> 0 and role = 1 $where order by numb,id desc $limit";
+		$sql = "select * from #_user where id <> 0 and role = 1 $where order by id desc $limit";
 		$items = $d->rawQuery($sql);
-		$sqlNum = "select count(*) as 'num' from #_user where id <> 0 and role = 1 $where order by numb,id desc";
+		$sqlNum = "select count(*) as 'num' from #_user where id <> 0 and role = 1 $where order by id desc";
 		$count = $d->rawQueryOne($sqlNum);
 		$total = (!empty($count)) ? $count['num'] : 0;
 		$url = "index.php?source=user&act=man_admin";
@@ -830,9 +830,9 @@
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;
 		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select * from #_member where id <> 0 $where order by numb,id desc $limit";
+		$sql = "select * from #_user where id <> 0 and role = 0 $where order by id desc $limit";
 		$items = $d->rawQuery($sql);
-		$sqlNum = "select count(*) as 'num' from #_member where id <> 0 $where order by numb,id desc";
+		$sqlNum = "select count(*) as 'num' from #_user where id <> 0 and role = 0 $where order by id desc";
 		$count = $d->rawQueryOne($sqlNum);
 		$total = (!empty($count)) ? $count['num'] : 0;
 		$url = "index.php?source=user&act=man_member";
@@ -852,7 +852,7 @@
 		}
 		else
 		{
-			$item = $d->rawQueryOne("select * from #_member where id = ? limit 0,1",array($id));
+			$item = $d->rawQueryOne("select * from #_user where id = ? limit 0,1",array($id));
 
 			if(empty($item))
 			{

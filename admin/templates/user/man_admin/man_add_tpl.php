@@ -32,12 +32,6 @@
             <div class="card-body">
             	<div class="row">
 					<div class="form-group col-md-4">
-						<?php if(isset($config['permission']['active']) && $config['permission']['active'] == true) { ?>
-							<label for="permission">Danh sách nhóm quyền:</label>
-							<?=$func->getPermission((!empty($flash->has('id_permission'))) ? $flash->get('id_permission') : @$item['id_permission'])?>
-						<?php } ?>
-					</div>
-					<div class="form-group col-md-4">
 						<label for="username">Tài khoản: <span class="text-danger">*</span></label>
 						<input type="text" class="form-control text-sm" name="data[username]" id="username" placeholder="Tài khoản" value="<?=(!empty($flash->has('username'))) ? $flash->get('username') : @$item['username']?>" required>
 					</div>
@@ -72,7 +66,7 @@
 					</div>
 					<div class="form-group col-md-4">
 						<label for="birthday">Ngày sinh:</label>
-						<input type="text" class="form-control text-sm max-date" name="data[birthday]" id="birthday" placeholder="Ngày sinh" value="<?=(!empty($flash->has('birthday'))) ? date("d/m/Y",$flash->get('birthday')) : ((!empty($item['birthday'])) ? date("d/m/Y",$item['birthday']) : '')?>" required autocomplete="off">
+						<input type="text" class="form-control text-sm max-date" name="data[birthday]" id="birthday" placeholder="Ngày sinh" value="<?=(!empty($flash->has('birthday'))) ? $flash->get('birthday') : @$item['birthday']?>" required autocomplete="off">
 					</div>
 					<div class="form-group col-md-4">
 						<label for="address">Địa chỉ:</label>
@@ -80,20 +74,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-				    <?php $status_array = (!empty($item['status'])) ? explode(',', $item['status']) : array(); ?>
-				    <?php if(isset($config['user']['check_admin'])) { foreach($config['user']['check_admin'] as $key => $value) { ?>
-				        <div class="form-group d-inline-block mb-2 mr-2">
-				            <label for="<?=$key?>-checkbox" class="d-inline-block align-middle mb-0 mr-2"><?=$value?>:</label>
+				<div class="form-group d-inline-block mb-2 mr-2">
+				            <label for="<?=$key?>-checkbox" class="d-inline-block align-middle mb-0 mr-2">Kích hoạt :</label>
 				            <div class="custom-control custom-checkbox d-inline-block align-middle">
-				                <input type="checkbox" class="custom-control-input <?=$key?>-checkbox" name="status[<?=$key?>]" id="<?=$key?>-checkbox" <?=(empty($status_array) && empty($item['id']) ? 'checked' : in_array($key, $status_array)) ? 'checked' : ''?> value="<?=$key?>">
-				                <label for="<?=$key?>-checkbox" class="custom-control-label"></label>
+				                <input type="checkbox" class="custom-control-input" name="data[status]" id="status" <?=@$item['status'] == 1 ? "checked" : ""?> value="<?@$item['status']?>">
+				                <label class="custom-control-label"></label>
 				            </div>
 				        </div>
-				    <?php } } ?>
-				</div>
-				<div class="form-group">
-					<label for="numb" class="d-inline-block align-middle mb-0 mr-2">Số thứ tự:</label>
-					<input type="number" class="form-control form-control-mini d-inline-block align-middle text-sm" min="0" name="data[numb]" id="numb" placeholder="Số thứ tự" value="<?=isset($item['numb']) ? $item['numb'] : 1?>">
 				</div>
             </div>
         </div>

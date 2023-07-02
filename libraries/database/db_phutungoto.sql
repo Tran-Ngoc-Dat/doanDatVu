@@ -352,19 +352,20 @@ CREATE TABLE `user` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender` tinyint(1) DEFAULT 0,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` tinyint(1) DEFAULT 1,
-  `birthday` int(11) DEFAULT 0
+  `birthday` date
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `phone`, `email`, `address`, `gender`, `status`, `role`, `birthday`) VALUES
-(142, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Ngọc Đạt', '0909090909', 'herrytran147@gmail.com', 'HCM', 0, NULL, 1, 0),
-(143, 'quocanhnguyen', 'bb67ccb42ce1b2ca897d0260e2fcc27d', 'Nguyễn Quốc Anh', '0988920598', 'quocanhnguyen1532@gmail.com', '59 Đường 48 Hiệp Bình Chánh', 0, '', 0, 0),
-(144, 'admin1', 'e00cf25ad42683b3df678c61f42c6bda', 'Đạt', '0990090909', 'quangduy727@gmail.com', 'HCM', 0, '', 0, 0);
+INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `phone`, `email`, `address`, `gender`, `photo`,`status`, `role`, `birthday`) VALUES
+(142, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Ngọc Đạt', '0909090909', 'herrytran147@gmail.com', 'HCM', 0,'', NULL, 1, 0),
+(143, 'quocanhnguyen', 'bb67ccb42ce1b2ca897d0260e2fcc27d', 'Nguyễn Quốc Anh', '0988920598', 'quocanhnguyen1532@gmail.com', '59 Đường 48 Hiệp Bình Chánh', 0,'', '', 0, 0),
+(144, 'admin1', 'e00cf25ad42683b3df678c61f42c6bda', 'Đạt', '0990090909', 'quangduy727@gmail.com', 'HCM', 0,'', '', 0, 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ

@@ -713,7 +713,7 @@
 		}
 
 		/* Lấy date */
-		public function makeDate($time=0, $dot='.', $lang='vi', $f=false)
+		public function makeDate($time=0, $dot='/', $lang='vi', $f=false)
 		{
 			$str = ($lang == 'vi') ? date("d{$dot}m{$dot}Y",$time) : date("m{$dot}d{$dot}Y",$time);
 
