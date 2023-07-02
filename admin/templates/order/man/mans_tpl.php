@@ -189,12 +189,37 @@
                                 </td>
                                 <td class="align-middle">
                                     <?php
-                                        if(isset($items[$i]['order_status']) && $items[$i]['order_status'] > 0)
+                                        if(isset($items[$i]['order_status']) && $items[$i]['order_status'] == 0)
                                         {
                                             $id_order_status = $items[$i]['order_status'];
-                                            $order_status = $d->rawQueryOne("select namevi, class_order from #_order_status where id = ?",array($id_order_status));
-                                        }
-                                    ?>
+                                            //$order_status = $d->rawQueryOne("select namevi, class_order from #_order_status where id = ?",array($id_order_status));
+                                            ?>
+                                           <span class="info-box-text text-primary font-weight-bold text-capitalize text-sm">Mới đặt</span>
+                                    <?php } ?>
+                                    <?php
+                                        if(isset($items[$i]['order_status']) && $items[$i]['order_status'] == 1)
+                                        {
+                                            $id_order_status = $items[$i]['order_status'];
+                                            //$order_status = $d->rawQueryOne("select namevi, class_order from #_order_status where id = ?",array($id_order_status));
+                                            ?>
+                                            <span class="info-box-text text-info font-weight-bold text-capitalize text-sm">Đã xác nhận</span>
+                                    <?php } ?>
+                                    <?php
+                                        if(isset($items[$i]['order_status']) && $items[$i]['order_status'] == 2)
+                                        {
+                                            $id_order_status = $items[$i]['order_status'];
+                                            //$order_status = $d->rawQueryOne("select namevi, class_order from #_order_status where id = ?",array($id_order_status));
+                                            ?>
+                                            <span class="info-box-text text-success font-weight-bold text-capitalize text-sm">Đã giao</span>
+                                    <?php } ?>
+                                    <?php
+                                        if(isset($items[$i]['order_status']) && $items[$i]['order_status'] == 3)
+                                        {
+                                            $id_order_status = $items[$i]['order_status'];
+                                            //$order_status = $d->rawQueryOne("select namevi, class_order from #_order_status where id = ?",array($id_order_status));
+                                            ?>
+                                            <span class="info-box-text text-danger font-weight-bold text-capitalize text-sm">Đã hủy</span>
+                                    <?php } ?>
                                     <span class="<?=$order_status['class_order']?> text-capitalize"><?=$order_status['namevi']?></span>
                                 </td>
                                 <?php if(
