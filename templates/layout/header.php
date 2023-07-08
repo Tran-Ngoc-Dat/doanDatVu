@@ -3,7 +3,7 @@
 		<div class="wrap-content">
 			<div class="box-header-bottom">
 				<a class="banner-header" href="<?=$configBase?>">
-					<img src="<?=$configBase?>upload/photo/<?= $logo['photo'] ?>" alt="" width="315" height="100">
+					<img src="<?=$configBase?>upload/photo/<?= $logo['photo'] ?>" alt="" width="370" height="100">
 				</a>
 				<div class="search w-clear">
 					<input type="text" id="keyword" placeholder="Sản phẩm cần tìm..." onkeypress="doEnter(event,'keyword');"/>

@@ -34,6 +34,12 @@
                 </div>
             </div>
         </div>
+        <select name="" id="select-prolist" class="select-prolist select2 w-50">
+            <option value="">Danh mục sản phẩm</option>
+            <?php foreach($category as $v) { ?>
+                <option value="<?=$v['id']?>" <?=($v['id'] == $id_category ? 'selected' : '')?> ><?=$v['name']?></option>
+            <?php }?>
+        </select>
     </div>
     <?php if(
         (isset($config['product']['dropdown']) && $config['product']['dropdown'] == true)
@@ -60,6 +66,7 @@
 							<th class="align-middle">Hình</th>
 						<?php } ?>
 						<th class="align-middle" style="width:30%">Tiêu đề</th>
+                        <th class="align-middle text-center">Số lượng tồn kho</th>
 						<?php if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>
 							<th class="align-middle text-center"><?=$value?></th>
 						<?php } } ?>
@@ -87,6 +94,9 @@
                                 <?php } ?>
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?><?=$linkID?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>"><?=$items[$i]['name']?></a>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <label><?=$items[$i]['inventory']?></label>
                                 </td>
                                 <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
                                 <?php if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>

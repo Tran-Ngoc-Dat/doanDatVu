@@ -96,22 +96,22 @@
 		else $maxTotal = 0;
 
 		/* Lấy đơn hàng - mới đặt */
-		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 0");
+		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 1");
 		$allNewOrder = $order_count['count(id)'];
 		$totalNewOrder = $order_count['sum(total_price)'];
 
 		/* Lấy đơn hàng - đã xác nhận */
-		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 1");
+		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 2");
 		$allConfirmOrder = $order_count['count(id)'];
 		$totalConfirmOrder = $order_count['sum(total_price)'];
 
 		/* Lấy đơn hàng - đã giao */
-		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 2");
+		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 4");
 		$allDeliveriedOrder = $order_count['count(id)'];
 		$totalDeliveriedOrder = $order_count['sum(total_price)'];
 
 		/* Lấy đơn hàng - đã hủy */
-		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 3");
+		$order_count = $d->rawQueryOne("select count(id), sum(total_price) from `order` where order_status = 5");
 		$allCanceledOrder = $order_count['count(id)'];
 		$totalCanceledOrder = $order_count['sum(total_price)'];
 	}
@@ -130,9 +130,16 @@
 		else
 		{
 			$item = $d->rawQueryOne("select * from `order` where id = ? limit 0,1",array($id));
+
 			if(empty($item))
 			{
 				$func->transfer("Dữ liệu không có thực", "index.php?source=order&act=man&p=".$curPage, false);
+			}
+			else
+			{
+				// die('xx');
+				/* Lấy chi tiết đơn hàng */
+				$order_detail = $d->rawQuery("select * from `order_detail` where id_order = ? order by id desc",array($id));
 			}
 		}
 	}
@@ -144,11 +151,11 @@
 
 		/* Check post */
 		if(empty($_POST))
-		{	
+		{
 			$func->transfer("Không nhận được dữ liệu", "index.php?source=order&act=man&p=".$curPage, false);
 		}
 
-		
+
 		/* Post dữ liệu */
 		$id = (!empty($_POST['id'])) ? htmlspecialchars($_POST['id']) : 0;
 		$data = (!empty($_POST['data'])) ? $_POST['data'] : null;
@@ -162,7 +169,7 @@
 
 		/* Save data */
 		if($id)
-		{	
+		{
 			$d->where('id', $id);
 			if($d->update('`order`',$data))
 			{
@@ -192,7 +199,7 @@
 
 			if(!empty($row))
 			{
-				$d->rawQuery("delete from `order_detail` where i`order` = ?",array($id));
+				$d->rawQuery("delete from `order_detail` where `id_order` = ?",array($id));
 				$d->rawQuery("delete from `order` where id = ?",array($id));
 				$func->transfer("Xóa dữ liệu thành công", "index.php?source=order&act=man&p=".$curPage);
 			}
@@ -200,24 +207,6 @@
 			{
 				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=order&act=man&p=".$curPage, false);
 			}
-		}
-		elseif(isset($_GET['listid']))
-		{
-			$listid = explode(",",$_GET['listid']);
-			
-			for($i=0;$i<count($listid);$i++)
-			{
-				$id = htmlspecialchars($listid[$i]);
-				$row = $d->rawQueryOne("select id from `order` where id = ? limit 0,1",array($id));
-
-				if(!empty($row))
-				{
-					$d->rawQuery("delete from `order_detail` where i`order` = ?",array($id));
-					$d->rawQuery("delete from `order` where id = ?",array($id));
-				}
-			}
-			
-			$func->transfer("Xóa dữ liệu thành công", "index.php?source=order&act=man&p=".$curPage);
 		}
 		else
 		{

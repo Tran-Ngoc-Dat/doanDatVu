@@ -48,7 +48,7 @@
                             </div>
                         </th>
                         <th class="align-middle text-center" width="10%">STT</th>
-						<th class="align-middle">Hình</th>
+						<!-- <th class="align-middle">Hình</th> -->
 						<th class="align-middle" style="width:30%">Tiêu đề</th>
 						<th class="align-middle text-center">Hiển thị</th>
                         <th class="align-middle text-center">Thao tác</th>
@@ -69,11 +69,11 @@
                                 <td class="align-middle">
                                     <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$items[$i]['id']?>" data-table="product_list">
                                 </td>
-                                <td class="align-middle">
+                                <!-- <td class="align-middle">
                                     	<a href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>">
                                             <img src="../upload/product/<?=$items[$i]['photo']?>" alt="" width="60" height="60">
                                         </a>
-                                    </td>
+                                    </td> -->
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>"><?=$items[$i]['name']?></a>
                                 </td>

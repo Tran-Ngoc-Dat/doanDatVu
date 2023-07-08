@@ -244,9 +244,51 @@
                         </div>
                     </div>
                     <?php } ?>
+                    <div class="form-group col-md-4">
+                        <label class="d-block" for="inventory">Số lượng tồn kho:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control inventory text-sm" name="data[inventory]" id="inventory"
+                                placeholder="Số lượng tồn kho"
+                                value="<?=(!empty($flash->has('inventory'))) ? $flash->get('inventory') : @$item['inventory']?>"
+                                >
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="card card-primary card-outline text-sm">
+                <div class="card-header">
+                    <h3 class="card-title">Bộ sưu tập <?= $config['product'][$type]['title_main'] ?></h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="filer-gallery" class="label-filer-gallery mb-3">Album hình: (<?= $config['product'][$type]['gallery'][$keyGallery]['img_type_photo'] ?>)</label>
+                        <input type="file" name="files[]" id="filer-gallery" multiple="multiple">
+                        <input type="hidden" class="col-filer" value="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
+                        <input type="hidden" class="act-filer" value="man">
+                        <input type="hidden" class="folder-filer" value="product">
+                    </div>
+                    <?php if (isset($gallery) && count($gallery) > 0) { ?>
+                        <div class="form-group form-group-gallery">
+                            <label class="label-filer">Album hiện tại:</label>
+                            <div class="action-filer mb-3">
+                                <a class="btn btn-sm bg-gradient-primary text-white check-all-filer mr-1"><i class="far fa-square mr-2"></i>Chọn tất cả</a>
+                                <button type="button" class="btn btn-sm bg-gradient-success text-white sort-filer mr-1"><i class="fas fa-random mr-2"></i>Sắp xếp</button>
+                                <a class="btn btn-sm bg-gradient-danger text-white delete-all-filer"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
+                            </div>
+                            <div class="alert my-alert alert-sort-filer alert-info text-sm text-white bg-gradient-info"><i class="fas fa-info-circle mr-2"></i>Có thể chọn nhiều hình để di chuyển</div>
+                            <div class="jFiler-items my-jFiler-items jFiler-row">
+                                <ul class="jFiler-items-list jFiler-items-grid row scroll-bar" id="jFilerSortable">
+                                    <?php foreach ($gallery as $v) echo $func->galleryFiler($v['numb'], $v['id'], $v['photo'], $v['namevi'], 'product', 'col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6'); ?>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
         <div class="card-footer text-sm">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i
                     class="far fa-save mr-2"></i>Lưu</button>
