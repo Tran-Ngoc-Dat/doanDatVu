@@ -208,7 +208,7 @@
                     <span>Video nổi bật</span>
                     <a href="video" class="text-decoration-none">Xem thêm</a>
                 </div>
-				xxx
+				<img src="./assets/images/zero/img_video.jpg" alt="video">
             </div>
         </div>
     </div>

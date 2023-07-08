@@ -1141,6 +1141,12 @@ $(document).ready(function(){
 			centsLimit: 0
 		});
 	}
+	$('body').on("change",".select-prolist",function() {
+		var id = $(this).val();
+		if(id > 0){
+			window.location.href = CONFIG_BASE + "admin/" +LINK_FILTER  +"&id_cate="+id;
+		}
+	});
 
 	/* PhotoZone */
 	if($("#photo-zone").length)
@@ -2139,3 +2145,194 @@ $(document).ready(function(){
 	    apexMixedChart.render();
 	}
 });
+
+
+/* Create sort filer */
+var sortable;
+function createSortFiler() {
+	if ($('#jFilerSortable').length) {
+		sortable = new Sortable.create(document.getElementById('jFilerSortable'), {
+			animation: 600,
+			swap: true,
+			disabled: true,
+			// swapThreshold: 0.25,
+			ghostClass: 'ghostclass',
+			multiDrag: true,
+			selectedClass: 'selected',
+			forceFallback: false,
+			fallbackTolerance: 3,
+			onEnd: function () {
+				/* Get all filer sort */
+				listid = new Array();
+				jFilerItems = $('#jFilerSortable').find('.my-jFiler-item');
+				jFilerItems.each(function (index) {
+					listid.push($(this).data('id'));
+				});
+
+				/* Update number */
+				var id_parent = ID;
+				var com = COM;
+				var kind = ACT;
+				var type = TYPE;
+				var colfiler = $('.col-filer').val();
+				var actfiler = $('.act-filer').val();
+				$.ajax({
+					url: 'api/filer.php',
+					type: 'POST',
+					dataType: 'json',
+					async: false,
+					data: {
+						id_parent: id_parent,
+						listid: listid,
+						com: com,
+						kind: actfiler,
+						type: type,
+						colfiler: colfiler,
+						cmd: 'updateNumb',
+						hash: HASH
+					},
+					success: function (result) {
+						var arrid = result.id;
+						var arrnumb = result.numb;
+						for (var i = 0; i < arrid.length; i++)
+							$('.my-jFiler-item-' + arrid[i])
+								.find('input[type=number]')
+								.val(arrnumb[i]);
+					}
+				});
+			}
+		});
+	}
+}
+
+/* Destroy sort filer */
+function destroySortFiler() {
+	try {
+		var destroy = sortable.destroy();
+	} catch (e) {}
+}
+
+/* Refresh filer when complete action */
+function refreshFiler() {
+	$('.sort-filer, .check-all-filer').removeClass('active');
+	$('.sort-filer').attr('disabled', false);
+	$('.alert-sort-filer').hide();
+
+	if ($('.check-all-filer').find('i').hasClass('fas fa-check-square')) {
+		$('.check-all-filer').find('i').toggleClass('far fa-square fas fa-check-square');
+	}
+
+	$('.my-jFiler-items .jFiler-items-list')
+		.find('input.filer-checkbox')
+		.each(function () {
+			$(this).prop('checked', false);
+		});
+}
+
+/* Refresh filer if empty */
+function refreshFilerIfEmpty() {
+	var id_parent = ID;
+	var com = COM;
+	var type = TYPE;
+	var colfiler = $('.col-filer').val();
+	var actfiler = $('.act-filer').val();
+	var cmd = 'refresh';
+
+	$.ajax({
+		type: 'POST',
+		dataType: 'html',
+		url: 'api/filer.php',
+		async: false,
+		data: {
+			id_parent: id_parent,
+			com: com,
+			kind: actfiler,
+			type: type,
+			colfiler: colfiler,
+			cmd: cmd,
+			hash: HASH
+		},
+		success: function (result) {
+			$('.jFiler-items-list').first().find('.jFiler-item').remove();
+			destroySortFiler();
+			$tmp =
+				'<div class="form-group form-group-gallery">' +
+				'<label class="label-filer">Album hiện tại:</label>' +
+				'<div class="action-filer mb-3">' +
+				'<a class="btn btn-sm bg-gradient-primary text-white check-all-filer mr-1"><i class="far fa-square mr-2"></i>Chọn tất cả</a>' +
+				'<button type="button" class="btn btn-sm bg-gradient-success text-white sort-filer mr-1"><i class="fas fa-random mr-2"></i>Sắp xếp</button>' +
+				'<a class="btn btn-sm bg-gradient-danger text-white delete-all-filer"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>' +
+				'</div>' +
+				'<div class="alert my-alert alert-sort-filer alert-info text-sm text-white bg-gradient-info"><i class="fas fa-info-circle mr-2"></i>Có thể chọn nhiều hình để di chuyển</div>' +
+				'<div class="jFiler-items my-jFiler-items jFiler-row">' +
+				'<ul class="jFiler-items-list jFiler-items-grid row scroll-bar" id="jFilerSortable">' +
+				result +
+				'</ul></div></div>';
+			$('#filer-gallery').parents('.form-group').after($tmp);
+			createSortFiler();
+		}
+	});
+}
+
+/* Delete filer */
+function deleteFiler(string) {
+	var str = string.split(',');
+	var id = str[0];
+	var folder = str[1];
+	var cmd = 'delete';
+
+	$.ajax({
+		type: 'POST',
+		url: 'api/filer.php',
+		data: {
+			id: id,
+			folder: folder,
+			cmd: cmd
+		}
+	});
+
+	$('.my-jFiler-item-' + id).remove();
+
+	if ($('.my-jFiler-items ul li').length == 0) {
+		$('.form-group-gallery').remove();
+	}
+}
+
+/* Delete all filer */
+function deleteAllFiler(folder) {
+	var listid = '';
+	var cmd = 'delete-all';
+
+	$('input.filer-checkbox').each(function () {
+		if (this.checked) listid = listid + ',' + this.value;
+	});
+
+	listid = listid.substr(1);
+
+	if (listid == '') {
+		notifyDialog('Bạn hãy chọn ít nhất 1 mục để xóa');
+		return false;
+	}
+
+	$.ajax({
+		type: 'POST',
+		url: 'api/filer.php',
+		data: {
+			listid: listid,
+			folder: folder,
+			cmd: cmd
+		}
+	});
+
+	listid = listid.split(',');
+
+	for (var i = 0; i < listid.length; i++) {
+		$('.my-jFiler-item-' + listid[i]).remove();
+	}
+
+	if ($('.my-jFiler-items ul li').length == 0) {
+		$('.form-group-gallery').remove();
+	}
+
+	refreshFiler();
+}

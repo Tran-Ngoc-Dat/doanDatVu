@@ -29,6 +29,7 @@
       <th scope="col">STT</th>
       <th scope="col">Mã đơn hàng</th>
       <th scope="col">Email</th>
+      <th scope="col">Tình trạng</th>
       <th scope="col">Tổng tiền</th>
       <th scope="col">Ngày đặt</th>
     </tr>
@@ -39,6 +40,32 @@
             <th scope="row"><?=$key+1?></th>
             <td><a href="chi-tiet-don-hang?id=<?=$v['id']?>"><?=$v['code']?></a></td>
             <td><?=$v['email']?></td>
+            <td>
+            <?php
+                if(isset($v['order_status']) && $v['order_status'] == 0)
+                {
+                    ?>
+                    <span class="info-box-text text-primary font-weight-bold text-capitalize text-sm">Mới đặt</span>
+            <?php } ?>
+            <?php
+                if(isset($v['order_status']) && $v['order_status'] == 1)
+                {
+                    ?>
+                    <span class="info-box-text text-info font-weight-bold text-capitalize text-sm">Đã xác nhận</span>
+            <?php } ?>
+            <?php
+                if(isset($v['order_status']) && $v['order_status'] == 2)
+                {
+                    ?>
+                    <span class="info-box-text text-success font-weight-bold text-capitalize text-sm">Đã giao</span>
+            <?php } ?>
+            <?php
+                if(isset($v['order_status']) && $v['order_status'] == 3)
+                {
+                    ?>
+                    <span class="info-box-text text-danger font-weight-bold text-capitalize text-sm">Đã hủy</span>
+            <?php } ?>
+            </td>
             <td><?=$func->formatMoney($v['total_price']);?></td>
             <td><?=date('d/m/Y',$v['total_price']);?></td>
         </tr>

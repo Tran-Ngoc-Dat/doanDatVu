@@ -5,7 +5,7 @@
     $config['product']['list'] = false;
     $config['product']['view'] = true;
     $config['product']['slug'] = true;
-    $config['product']['check'] = array("noibat" => "Nổi bật","banchay" => "Bán chạy","hot" => "Hot", "hienthi" => "Hiển thị");
+    $config['product']['check'] = array("noibat" => "Nổi bật","hienthi" => "Hiển thị");
     $config['product']['images'] = true;
     $config['product']['show_images'] = true;
     $config['product']['sku'] = true;

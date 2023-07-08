@@ -254,7 +254,7 @@
 				$d->rawQuery("delete from #_permission_group where id = ?",array($id));
 				$row = $d->rawQuery("select * from #_permission where id_permission_group = ?",array($id));
 				if(count($row)) $d->rawQuery("delete from #_permission where id_permission_group = ?",array($id));
-				$row = $d->rawQuery("select * from #_user where id_permission = ?",array($id));
+				$row = $d->rawQuery("select * from user where id_permission = ?",array($id));
 
 				if(count($row))
 				{
@@ -284,7 +284,7 @@
 					$d->rawQuery("delete from #_permission_group where id = ?",array($id));
 					$row = $d->rawQuery("select * from #_permission where id_permission_group = ?",array($id));
 					if(count($row)) $d->rawQuery("delete from #_permission where id_permission_group = ?",array($id));
-					$row = $d->rawQuery("select * from #_user where id_permission = ?",array($id));
+					$row = $d->rawQuery("select * from user where id_permission = ?",array($id));
 
 					if(count($row))
 					{
@@ -319,9 +319,9 @@
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;
 		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select * from #_user where id <> 0 and role = 1 $where order by id desc $limit";
+		$sql = "select * from user where id <> 0 and role = 1 $where order by id desc $limit";
 		$items = $d->rawQuery($sql);
-		$sqlNum = "select count(*) as 'num' from #_user where id <> 0 and role = 1 $where order by id desc";
+		$sqlNum = "select count(*) as 'num' from user where id <> 0 and role = 1 $where order by id desc";
 		$count = $d->rawQueryOne($sqlNum);
 		$total = (!empty($count)) ? $count['num'] : 0;
 		$url = "index.php?source=user&act=man_admin";
@@ -341,7 +341,7 @@
 		}
 		else
 		{
-			$item = $d->rawQueryOne("select * from #_user where role = 1 and id = ? limit 0,1",array($id));
+			$item = $d->rawQueryOne("select * from user where role = 1 and id = ? limit 0,1",array($id));
 
 			if(empty($item))
 			{
@@ -394,7 +394,7 @@
 
 				if(!empty($old_pass))
 				{
-					$row = $d->rawQueryOne("select id, password from #_user where username = ? limit 0,1",array($_SESSION[$loginAdmin]['username']));
+					$row = $d->rawQueryOne("select id, password from user where username = ? limit 0,1",array($_SESSION[$loginAdmin]['username']));
 
 					if(empty($row['id']) || (!empty($row['id']) && ($row['password'] != md5($config['website']['secret'].$old_pass.$config['website']['salt']))))
 					{
@@ -547,7 +547,7 @@
 			}
 		}
 		
-		$item = $d->rawQueryOne("select * from #_user where username = ? limit 0,1",array($_SESSION[$loginAdmin]['username']));
+		$item = $d->rawQueryOne("select * from user where username = ? limit 0,1",array($_SESSION[$loginAdmin]['username']));
 	}
 
 	/* Save admin */
@@ -713,7 +713,7 @@
 		{
 			if($func->checkRole())
 			{
-				$row = $d->rawQueryOne("select id from #_user where id = ? limit 0,1",array($id));
+				$row = $d->rawQueryOne("select id from user where id = ? limit 0,1",array($id));
 
 				if(!empty($row))
 				{
@@ -769,11 +769,11 @@
 
 		if($id)
 		{
-			$row = $d->rawQueryOne("select id from #_user where id = ? limit 0,1",array($id));
+			$row = $d->rawQueryOne("select id from user where id = ? limit 0,1",array($id));
 
 			if(!empty($row['id']))
 			{
-				$d->rawQuery("delete from #_user where id = ? and role = 1",array($id));
+				$d->rawQuery("delete from user where id = ? and role = 1",array($id));
 				$func->transfer("Xóa dữ liệu thành công", "index.php?source=user&act=man_admin&p=".$curPage);
 			}
 			else
@@ -788,11 +788,11 @@
 			for($i=0;$i<count($listid);$i++)
 			{
 				$id = htmlspecialchars($listid[$i]);
-				$row = $d->rawQueryOne("select id from #_user where id = ? limit 0,1",array($id));
+				$row = $d->rawQueryOne("select id from user where id = ? limit 0,1",array($id));
 
 				if(!empty($row['id']))
 				{
-					$d->rawQuery("delete from #_user where id = ? and role = 1",array($id));
+					$d->rawQuery("delete from user where id = ? and role = 1",array($id));
 				}
 			}
 
@@ -830,9 +830,9 @@
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;
 		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select * from #_user where id <> 0 and role = 0 $where order by id desc $limit";
+		$sql = "select * from user where id <> 0 and role = 0 $where order by id desc $limit";
 		$items = $d->rawQuery($sql);
-		$sqlNum = "select count(*) as 'num' from #_user where id <> 0 and role = 0 $where order by id desc";
+		$sqlNum = "select count(*) as 'num' from user where id <> 0 and role = 0 $where order by id desc";
 		$count = $d->rawQueryOne($sqlNum);
 		$total = (!empty($count)) ? $count['num'] : 0;
 		$url = "index.php?source=user&act=man_member";
@@ -852,7 +852,7 @@
 		}
 		else
 		{
-			$item = $d->rawQueryOne("select * from #_user where id = ? limit 0,1",array($id));
+			$item = $d->rawQueryOne("select * from user where id = ? limit 0,1",array($id));
 
 			if(empty($item))
 			{
@@ -871,7 +871,6 @@
 		{
 			$func->transfer("Không nhận được dữ liệu", "index.php?source=user&act=man_member&p=".$curPage, false);
 		}
-
 		/* Post dữ liệu */
 		$message = '';
 		$response = array();
@@ -883,7 +882,7 @@
 			{
 				$data[$column] = ($column == 'password') ? $value : htmlspecialchars($func->sanitize($value));
 			}
-
+			
 			if(isset($_POST['status']))
 			{
 				$status = '';
@@ -894,30 +893,30 @@
 			{
 				$data['status'] = "";
 			}
-
+			
 			$birthday = $data['birthday'];
 			$data['birthday'] = strtotime(str_replace("/","-",$data['birthday']));
 		}
-
+		
 		/* Valid data */
 		if(empty($data['username']))
 		{
 			$response['messages'][] = 'Tài khoản không được trống';
 		}
-
+		
 		if(!empty($data['username']) && !$func->isAlphaNum($data['username']))
 		{
 			$response['messages'][] = 'Tài khoản chỉ được nhập chữ thường và số (chữ thường không dấu, ghi liền nhau, không khoảng trắng)';
 		}
-
+		
 		if(!empty($data['username']))
 		{
-			if($func->checkAccount($data['username'], 'username', 'member', $id))
+			if($func->checkAccount($data['username'], 'username', 'user', $id))
 			{
 				$response['messages'][] = 'Tài khoản đã tồn tại';
 			}
 		}
-
+		
 		if(empty($id) || !empty($data['password']))
 		{
 			if(empty($data['password']))
@@ -936,53 +935,25 @@
 			}
 		}
 
-		if(empty($data['fullname']))
-		{
-			$response['messages'][] = 'Họ tên không được trống';
-		}
-
-		if(empty($data['email']))
-		{
-			$response['messages'][] = 'Email không được trống';
-		}
-
+		
 		if(!empty($data['email']) && !$func->isEmail($data['email']))
 		{
 			$response['messages'][] = 'Email không hợp lệ';
 		}
-
+		
 		if(!empty($data['email']))
 		{
-			if($func->checkAccount($data['email'], 'email', 'member', $id))
+			if($func->checkAccount($data['email'], 'email', 'user', $id))
 			{
 				$response['messages'][] = 'Email đã tồn tại';
 			}
 		}
-
+		
 		if(!empty($data['phone']) && !$func->isPhone($data['phone']))
 		{
 			$response['messages'][] = 'Số điện thoại không hợp lệ';
 		}
-
-		if(empty($data['gender']))
-		{
-			$response['messages'][] = 'Chưa chọn giới tính';
-		}
-
-		if(empty($birthday))
-		{
-			$response['messages'][] = 'Ngày sinh không được trống';
-		}
 		
-		if(!empty($birthday) && !$func->isDate($birthday))
-		{
-			$response['messages'][] = 'Ngày sinh không hợp lệ';
-		}
-
-		if(empty($data['address']))
-		{
-			$response['messages'][] = 'Địa chỉ không được trống';
-		}
 
 		if(!empty($response))
 		{
@@ -997,12 +968,12 @@
 					}
 				}
 			}
-
+			
 			/* Errors */
 			$response['status'] = 'danger';
 			$message = base64_encode(json_encode($response));
 			$flash->set('message', $message);
-
+			
 			if(empty($id))
 			{
 				$func->redirect("index.php?source=user&act=add_member");
@@ -1012,13 +983,13 @@
 				$func->redirect("index.php?source=user&act=edit_member&id=".$id);
 			}
 		}
-
+		
 		/* Save data */
 		if($id)
 		{
 			if($func->checkRole())
 			{
-				$row = $d->rawQueryOne("select id from #_member where id = ? limit 0,1",array($id));
+				$row = $d->rawQueryOne("select id from user where id = ? limit 0,1",array($id));
 
 				if(!empty($row))
 				{
@@ -1038,7 +1009,7 @@
 			}
 			
 			$d->where('id', $id);
-			if($d->update('member',$data))
+			if($d->update('user',$data))
 			{
 				$func->transfer("Cập nhật dữ liệu thành công", "index.php?source=user&act=man_member&p=".$curPage);
 			}
@@ -1049,12 +1020,13 @@
 		}
 		else
 		{		
+			
 			if(!empty($data['password']))
 			{
 				$data['password'] = md5($data['password']);
 			}
 			
-			if($d->insert('member',$data))
+			if($d->insert('user',$data))
 			{
 				$func->transfer("Lưu dữ liệu thành công", "index.php?source=user&act=man_member&p=".$curPage);
 			}
@@ -1074,11 +1046,11 @@
 
 		if($id)
 		{
-			$row = $d->rawQueryOne("select id from #_member where id = ? limit 0,1",array($id));
+			$row = $d->rawQueryOne("select id from user where id = ? limit 0,1",array($id));
 
 			if(!empty($row['id']))
 			{
-				$d->rawQuery("delete from #_member where id = ?",array($id));
+				$d->rawQuery("delete from user where id = ?",array($id));
 				$func->transfer("Xóa dữ liệu thành công", "index.php?source=user&act=man_member&p=".$curPage);
 			}
 			else

@@ -2,6 +2,7 @@
     $linkMan = "index.php?source=product&act=category";
     $linkSave = "index.php?source=product&act=save_cate";
     $colLeft = "col-xl-8";
+    $colMain = "col-xl-12";
     $colRight = "col-xl-4";
 ?>
 <!-- Content Header -->
@@ -27,7 +28,7 @@
 
         
         <div class="row">
-            <div class="<?=$colLeft?>">
+            <div class="<?=$colMain?>">
                 <?php
                 $slugchange = ($act=='edit_cate') ? 1 : 0;
                 include TEMPLATE.LAYOUT."slug.php";
@@ -65,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="<?=$colRight?>">
+            <!-- <div class="<?=$colRight?>">
                     <div class="card card-primary card-outline text-sm">
                         <div class="card-header">
                             <h3 class="card-title">Hình ảnh danh mục</h3>
@@ -88,7 +89,7 @@
                             ?>
                         </div>
                     </div>
-            </div>
+            </div> -->
         </div>
         <div class="card-footer text-sm">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i class="far fa-save mr-2"></i>Lưu</button>

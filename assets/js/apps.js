@@ -320,3 +320,18 @@ $(document).ready(function () {
 	})
 });
 
+/* Menu fixed */
+if(isExist($(".menu-page")))
+{
+	$(window).scroll(function(){
+		if($(window).scrollTop() >= $(".menu-page").height())
+		{
+			$(".menu-page").addClass('menu-fix');
+		}
+		else
+		{
+			$(".menu-page").removeClass('menu-fix');
+		}
+	});
+}
+

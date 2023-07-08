@@ -8,6 +8,7 @@
 			viewMans();
 			$template = "product/man/mans";
 			break;
+
 		case "add":
 			$category = $d->rawQuery("select * from category order by id desc");
 			$template = "product/man/man_add";
@@ -48,7 +49,7 @@
 	function viewMans()
 	{
 		
-		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type, $category;
+		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type, $category, $id_category;
 
 		$where = "";
 
@@ -56,6 +57,12 @@
 		{
 			$keyword = htmlspecialchars($_REQUEST['keyword']);
 			$where .= " and (name LIKE '%$keyword%')";
+		}
+
+		if(isset($_REQUEST['id_cate']))
+		{
+			$id_category = htmlspecialchars($_REQUEST['id_cate']);
+			$where .= " and id_category = $id_category";
 		}
 
 		$category = $d->rawQuery("select * from category order by id desc");
@@ -75,7 +82,7 @@
 	/* Edit man */
 	function editMan()
 	{
-		global $d, $func, $strUrl, $curPage, $item, $com, $act, $category;
+		global $d, $func, $strUrl, $curPage, $item, $com, $act, $category, $gallery;
 
 		if(!empty($_GET['id'])) $id = htmlspecialchars($_GET['id']);
 		else if(!empty($_GET['id_copy'])) $id = htmlspecialchars($_GET['id_copy']);
@@ -90,6 +97,7 @@
 		else
 		{
 			$item = $d->rawQueryOne("select * from #_product where id = ? limit 0,1",array($id));
+			$gallery = $d->rawQuery("select * from gallery where id_product = ? order by id desc",array($id));
 
 			if(empty($item))
 			{
@@ -109,15 +117,15 @@
 			$func->transfer("Không nhận được sản phẩm", "index.php?source=product&act=man&p=".$curPage.$strUrl, false);
 		}
 
+		// $func->dump($_FILES['review-file-photo']['name'][1],true);
+
 		/* Post sản phẩm */
 		$message = '';
 		$response = array();
 		$savehere = (isset($_POST['save-here'])) ? true : false;
 		$id = (!empty($_POST['id'])) ? htmlspecialchars($_POST['id']) : 0;
 		$data = (!empty($_POST['data'])) ? $_POST['data'] : null;
-
-
-		
+		$dataPhoto = $func->listsGallery('review-file-photo');
 		if($data)
 		{
 			foreach($data as $column => $value)
@@ -252,6 +260,35 @@
 						unset($photoUpdate);
 					}
 				}
+
+				if(!empty($dataPhoto))
+                {
+                    $myFile = $_FILES['review-file-photo'];
+                    $fileCount = count($myFile["name"]) - 1;
+                    for($i=0;$i<$fileCount;$i++)
+                    {
+                        if(in_array($myFile["name"][$i], $dataPhoto))
+                        {               
+
+                            $_FILES['file-uploader-temp'] = array(
+                                'name' => $myFile['name'][$i],
+                                'type' => $myFile['type'][$i],
+                                'tmp_name' => $myFile['tmp_name'][$i],
+                                'error' => $myFile['error'][$i],
+                                'size' => $myFile['size'][$i]
+                            );
+                            $file_name = $func->uploadName($myFile["name"][$i]);
+
+                            if($photo = $func->uploadImage("file-uploader-temp", '.jpg|.png|.jpeg', ROOT."/upload/product/", $file_name))
+                            {
+                                $dataTemp = array();
+                                $dataTemp['id_product'] = $id;
+                                $dataTemp['photo'] = $photo;
+                                $d->insert('gallery', $dataTemp);
+                            }
+                        }
+                    }
+                }
 				$func->transfer("Cập nhật sản phẩm thành công", "index.php?source=product&act=man");
 			}
 			else
@@ -289,6 +326,34 @@
 						unset($photoUpdate);
 					}
 				}
+				if(!empty($dataPhoto))
+                {
+                    $myFile = $_FILES['review-file-photo'];
+                    $fileCount = count($myFile["name"]) - 1;
+                    for($i=0;$i<$fileCount;$i++)
+                    {
+                        if(in_array($myFile["name"][$i], $dataPhoto))
+                        {               
+
+                            $_FILES['file-uploader-temp'] = array(
+                                'name' => $myFile['name'][$i],
+                                'type' => $myFile['type'][$i],
+                                'tmp_name' => $myFile['tmp_name'][$i],
+                                'error' => $myFile['error'][$i],
+                                'size' => $myFile['size'][$i]
+                            );
+                            $file_name = $func->uploadName($myFile["name"][$i]);
+
+                            if($photo = $func->uploadImage("file-uploader-temp", '.jpg|.png|.jpeg', ROOT."/upload/product/", $file_name))
+                            {
+                                $dataTemp = array();
+                                $dataTemp['id_product'] = $id_insert;
+                                $dataTemp['photo'] = $photo;
+                                $d->insert('gallery', $dataTemp);
+                            }
+                        }
+                    }
+                }
 				$func->transfer("Lưu sản phẩm thành công", "index.php?source=product&act=man");
 
 			}
@@ -569,30 +634,6 @@
 			} else {
 				$func->transfer("Xóa dữ liệu bị lỗi", "index.php?source=product&act=category&p=" . $curPage . $strUrl, false);
 			}
-		} elseif (isset($_GET['listid'])) {
-			$listid = explode(",", $_GET['listid']);
-
-			for ($i = 0; $i < count($listid); $i++) {
-				$id = htmlspecialchars($listid[$i]);
-
-				/* Lấy dữ liệu */
-				$row = $d->rawQueryOne("select id, photo from category where id = ? and type = ? limit 0,1", array($id, $type));
-
-				if (!empty($row)) {
-					/* Xóa chính */
-					$func->deleteFile("../upload/product/" . $row['photo']);
-					$d->rawQuery("delete from category where id = ?", array($id));
-
-					if (count($row)) {
-						foreach ($row as $v) {
-							$func->deleteFile("../upload/product/" . $v['photo']);
-						}
-
-					}
-				}
-			}
-
-			$func->transfer("Xóa dữ liệu thành công", "index.php?source=product&act=category&p=" . $curPage . $strUrl);
 		} else {
 			$func->transfer("Không nhận được dữ liệu", "index.php?source=product&act=category&p=" . $curPage . $strUrl, false);
 		}
