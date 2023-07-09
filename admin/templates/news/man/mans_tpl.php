@@ -44,13 +44,7 @@ $copyImg = (isset($config['news'][$type]['copy_image']) && $config['news'][$type
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
-                        <th class="align-middle text-center" width="10%">STT</th>
+                        <th class="align-middle">STT</th>
                         <?php if (isset($config['news'][$type]['show_images']) && $config['news'][$type]['show_images'] == true) { ?>
                             <th class="align-middle">Hình</th>
                         <?php } ?>
@@ -75,13 +69,7 @@ $copyImg = (isset($config['news'][$type]['copy_image']) && $config['news'][$type
                             $linkID = ""; ?>
                             <tr>
                                 <td class="align-middle">
-                                    <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?= $items[$i]['id'] ?>" value="<?= $items[$i]['id'] ?>">
-                                        <label for="select-checkbox-<?= $items[$i]['id'] ?>" class="custom-control-label"></label>
-                                    </div>
-                                </td>
-                                <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?= $i + 1?>" data-id="<?= $items[$i]['id'] ?>" data-table="news">
+                                    <a class="text-dark text-break"><?=$i+1?></a>
                                 </td>
                                 <?php if (isset($config['news'][$type]['show_images']) && $config['news'][$type]['show_images'] == true) { ?>
                                     <td class="align-middle">
