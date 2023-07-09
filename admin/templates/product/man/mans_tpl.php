@@ -55,7 +55,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle text-center" width="10%">STT</th>
+                        <th class="align-middle">STT</th>
 						<?php if(isset($config['product']['show_images']) && $config['product']['show_images'] == true) { ?>
 							<th class="align-middle">Hình</th>
 						<?php } ?>
@@ -76,7 +76,7 @@
 							if($items[$i]['id_cat']) $linkID .= "&id_cat=".$items[$i]['id_cat']; ?>
                             <tr>
                                 <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-id="<?=$items[$i]['id']?>" data-table="product">
+                                    <a class="text-dark text-break"><?=$i+1?></a>
                                 </td>
                                 <?php if(isset($config['product']['show_images']) && $config['product']['show_images'] == true) { ?>
                                     <td class="align-middle">

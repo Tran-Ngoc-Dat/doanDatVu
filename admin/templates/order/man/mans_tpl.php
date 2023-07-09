@@ -134,17 +134,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <?php /* ?><th class="align-middle text-center" width="10%">STT</th><?php */ ?>
                         <th class="align-middle">Mã đơn hàng</th>
                         <th class="align-middle" style="width:15%">Họ tên</th>
                         <th class="align-middle">Ngày đặt</th>
-                        <th class="align-middle">Hình thức thanh toán</th>
                         <th class="align-middle">Tổng giá</th>
                         <th class="align-middle">Tình trạng</th>
                         <?php if(
@@ -163,27 +156,12 @@
                         <?php for($i=0;$i<count($items);$i++) { ?>
                             <tr>
                                 <td class="align-middle">
-                                    <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-<?=$items[$i]['id']?>" value="<?=$items[$i]['id']?>">
-                                        <label for="select-checkbox-<?=$items[$i]['id']?>" class="custom-control-label"></label>
-                                    </div>
-                                </td>
-                                <?php /* ?>
-                                    <td class="align-middle">
-                                        <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$items[$i]['numb']?>" data-id="<?=$items[$i]['id']?>" data-table="order">
-                                    </td>
-                                <?php */ ?>
-                                <td class="align-middle">
                                     <a class="text-primary" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['code']?>"><?=$items[$i]['code']?></a>
                                 </td>
                                 <td class="align-middle">
                                     <a class="text-primary" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['fullname']?>"><?=$items[$i]['fullname']?></a>
                                 </td>
                                 <td class="align-middle"><?=date("h:i:s A - d/m/Y", $items[$i]['date_created'])?></td>
-                                <td class="align-middle">
-                                    <?php $order_payment = $func->getInfoDetail('namevi', 'news', $items[$i]['order_payment']); ?>
-                                    <span class="text-info"><?=$order_payment['namevi']?></span>
-                                </td>
                                 <td class="align-middle">
                                     <span class="text-danger font-weight-bold"><?=$func->formatMoney($items[$i]['total_price'])?></span>
                                 </td>
