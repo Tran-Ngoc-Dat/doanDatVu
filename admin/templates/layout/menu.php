@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4 text-sm">
     <!-- Logo -->
     <a class="brand-link" href="index.php">
-        <img class="brand-image" src="assets/images/logo-main.png" alt="Logo">
+        <img class="brand-image" src="assets/images/logo-lyduong.png" alt="Logo">
     </a>
     <!-- Sidebar -->
     <div class="sidebar">

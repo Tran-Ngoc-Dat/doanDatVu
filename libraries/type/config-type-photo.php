@@ -4,9 +4,9 @@
     $config['photo']['photo_static'][$nametype]['title_main'] = "Logo";
     $config['photo']['photo_static'][$nametype]['check'] = array("hienthi" => "Hiển thị");
     $config['photo']['photo_static'][$nametype]['images'] = true;
-    $config['photo']['photo_static'][$nametype]['width'] = 120;
+    $config['photo']['photo_static'][$nametype]['width'] = 405;
     $config['photo']['photo_static'][$nametype]['height'] = 100;
-    $config['photo']['photo_static'][$nametype]['thumb'] = '120x100x1';
+    $config['photo']['photo_static'][$nametype]['thumb'] = '405x100x1';
     $config['photo']['photo_static'][$nametype]['img_type'] = '.jpg|.gif|.png|.jpeg|.gif';
 
     /* Ảnh giới thiệu */

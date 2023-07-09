@@ -45,6 +45,7 @@ $requick = array(
 
 	/* Tin tức */
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tin-tuc", "type" => "tin-tuc"),
+	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tuyen-dung", "type" => "tuyen-dung"),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "gioi-thieu", "type" => "gioi-thieu"),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "dich-vu", "type" => "dich-vu"),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "bao-duong", "type" => "bao-duong"),
@@ -103,39 +104,11 @@ switch ($com) {
 	$titleMain = "Tin tức";
 	break;
 
-	case 'dich-vu':
+	case 'tuyen-dung':
 	$source = "news";
 	$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
 	$type = $com;
-	$titleMain = "Dịch vụ";
-	break;
-
-	case 'bao-duong':
-	$source = "news";
-	$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
-	$type = $com;
-	$titleMain = "Bảo dưỡng";
-	break;
-
-	case 'khach-hang':
-	$source = "news";
-	$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
-	$type = $com;
-	$titleMain = "Khách hàng";
-	break;
-
-	case 'cau-hoi-thuong-gap':
-	$source = "news";
-	$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
-	$type = $com;
-	$titleMain = "Câu hỏi thường gặp";
-	break;
-
-	case 'chinh-sacha':
-	$source = "news";
-	$template = isset($_GET['id']) ? "news/news_detail" : "news/news";
-	$type = $com;
-	$titleMain = "Chính sách";
+	$titleMain = "Tuyển dụng";
 	break;
 	case 'lien-he':
 	$source = "contact";

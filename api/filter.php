@@ -48,59 +48,40 @@ $items = $d->rawQuery($sqlCache, $params);
 // $pagingItems = $pagingAjax->getAllPageLinks($countItems, $pageLink, $eShow);
 ?>
 <?php if ($items) { ?>
-    <?php foreach ($items as $k => $v) { ?>
-        <div class="">
-         <div class="product">
-            <div class="box-product">
-                <a href="<?= $v['slug'] ?>" class="pic-product scale-img">
-                    <img src="upload/product/<?= $v['photo'] ?>" alt="" width="600" height="600">
-                </a>
-                <div class="info-product fix-product">
-                    <h3 class="name-product"><a href="<?= $v['slug'] ?>"
-                        class="text-decoration-none text-split2"><?= $v['name'] ?></a></h3>
-                        <div class="d-flex justify-content-around align-items-center">
-                            <p class="price-product">
-                                <?php if ($v['discount'] > 0) { ?>
-                                    <span class="price-new">
-                                        <?= $func->formatMoney($v['sale_price']); ?>
-                                    </span><br>
-                                    <span class="price-old">
-                                        <?= $func->formatMoney($v['regular_price']); ?>
-                                    </span>
-                                    <span class="price-per">
-                                        <?= '-' . $v['discount'] . '%' ?>
-                                    </span>
-                                <?php } else { ?>
-                                    <span class="price-new">
-                                        <?php if ($v['regular_price']) { ?>
-                                            <?= $func->formatMoney($v['regular_price']); ?>
-                                        <?php } else { ?>
-                                            <span><a href="tel:<?= $optsetting['hotline'] ?>" class="text-dark">Liên
-                                            hệ</a></span>
-                                        <?php } ?>
-                                    </span>
-                                <?php } ?>
-                            </p>
-                            <div class="product-cart"><a class="addcart" data-id="<?= $v['id'] ?>"
-                                data-action="addnow"><i class="fas fa-shopping-cart"></i></a></div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <?php } ?>
-    <div class="pagination-ajax">
-        <?= $pagingItems ?>
+<?php foreach ($items as $k => $v) { ?>
+<div class="item-product fix-product">
+    <div class="img-product">
+        <a class="scale-img" href="<?= $configBase ?><?= $v['slug'] ?>" title="<?= $v['name'] ?>">
+            <img src="<?= $configBase ?>upload/product/<?= $v['photo'] ?>" alt="" width="280" height="280">
+        </a>
+        <a class="text-decoration-none btn-product cart-add addcart" data-id="<?=$v['id']?>" data-action="addnow">
+            <span>Thêm giỏ hàng</span>
+        </a>
     </div>
+    <div class="title-product">
+        <h3 class="name-product"><a class="text-split text-decoration-none" href="<?= $configBase ?><?= $v['slug'] ?>"
+                title="<?= $v['name'] ?>"><?= $v['name'] ?></a></h3>
+        <p class="price-product">
+            <?php if($v['discount']>0) { ?>
+            <span class="price-new"><?=$func->formatMoney($v['sale_price'])?></span>
+            <span class="price-old"><?=$func->formatMoney($v['regular_price'])?></span>
+            <span class="price-per"><?='-'.$v['discount'].'%'?></span>
+            <?php } else { ?>
+            <span class="price-new"><?=($v['regular_price']) ? $func->formatMoney($v['regular_price']) : lienhe?></span>
+            <?php } ?>
+        </p>
+    </div>
+</div>
+<?php } ?>
+<div class="pagination-ajax mt-3 mb-3">
+    <?= $pagingItems ?>
+</div>
 <?php } else { ?>
-    <div class="full-row">
-        <div class="alert alert-warning w-100" role="alert">
-            <strong>
-                Không có sản phẩm phù hợp
-            </strong>
-        </div>
+<div class="full-row">
+    <div class="alert alert-warning w-100" role="alert">
+        <strong>
+            Không có sản phẩm phù hợp
+        </strong>
     </div>
-    <?php } ?>
+</div>
+<?php } ?>

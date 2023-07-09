@@ -57,11 +57,11 @@
                                 <td class="align-middle">
                                     <a class="text-dark text-break"><?=$i+1?></a>
                                 </td>
-                                <td class="align-middle">
+                                <!-- <td class="align-middle">
                                     	<a href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>">
                                             <img src="../upload/product/<?=$items[$i]['photo']?>" alt="" width="60" height="60">
                                         </a>
-                                    </td>
+                                    </td> -->
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['name']?>"><?=$items[$i]['name']?></a>
                                 </td>
