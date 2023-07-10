@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb" id="bar_breadcrumb">
     <div class="warp-content">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb fix-padding">
             <li class="breadcrumb-item">
-                <a href="index.php">Trang chủ</a>
+                <a href="<?= $configBase ?>">Trang chủ</a>
             </li>
             <li class="breadcrumb-item">
                 <a href="thong-tin-ca-nhan">Thông tin cá nhân</a>
@@ -14,7 +14,7 @@
     <div class="title-user">
         <span>Thông tin cá nhân</span>
     </div>
-    <div class="d-flex justify-content-between align-items-start">
+    <div class="d-flex justify-content-between align-items-start mt-3">
         <div class="box-user">
             <div class="items-info"><a href="thong-tin-ca-nhan" class="<?=$action=='thong-tin-ca-nhan' ? 'act' : ''?> text-decoration-none">Thông tin cá nhân</a></div>
             <div class="items-info"><a href="don-hang-cua-ban" class="<?=$action=='don-hang-cua-ban' ? 'act' : ''?> text-decoration-none">Đơn hàng của bạn</a></div>

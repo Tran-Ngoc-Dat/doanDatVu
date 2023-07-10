@@ -484,7 +484,7 @@
 
 .irs--sharp .irs-bar {
     top: 0px;
-    height: 2px;
+    height: 3px;
     background-color: #F9B00A;
 }
 
@@ -499,8 +499,8 @@
 }
 
 .irs--sharp .irs-handle {
-    top: -6px;
-    width: 10px;
+    top: -5px;
+    width: 11.64px;
     height: 10px;
     background-color: #F9B00A;
 }
@@ -512,7 +512,7 @@
     left: 0;
     width: 0;
     height: 0;
-    border: 5px solid transparent;
+    border: 6px solid transparent;
     border-top-color: #F9B00A;
 }
 
@@ -536,14 +536,14 @@
 }
 
 .irs--sharp .irs-from,.irs--sharp .irs-to,.irs--sharp .irs-single {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1;
     text-shadow: none;
     padding: 3px 4px;
     background-color: #F9B00A;
     color: #000;
     border-radius: 2px;
-    top: 9px;
+    top: 13px;
 }
 
 .irs--sharp .irs-from:before,.irs--sharp .irs-to:before,.irs--sharp .irs-single:before {

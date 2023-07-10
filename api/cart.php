@@ -158,7 +158,7 @@ if ($cmd == 'add-cart' && $id > 0) {
                         <p class="total-price load-price-temp"><?= $func->formatMoney($cart->getOrderTotal()) ?></p>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-between">
                     <a href="san-pham" class="buymore-cart text-decoration-none" title="Tiếp tục mua hàng">
                         <i class="fa fa-angle-double-left"></i>
                         <span>Tiếp tục mua hàng</span>

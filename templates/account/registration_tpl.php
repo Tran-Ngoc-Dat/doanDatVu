@@ -1,10 +1,22 @@
+<nav aria-label="breadcrumb" id="bar_breadcrumb">
+    <div class="warp-content">
+        <ol class="breadcrumb fix-padding">
+            <li class="breadcrumb-item">
+                <a href="<?= $configBase ?>">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="dang-ky">Đăng ký</a>
+            </li>
+        </ol>
+    </div>
+</nav>
 <div class="wrap-user wrap-chill">
     <div class=" title-user">
         <span>ĐĂNG KÝ</span>
 
     </div>
     <?= $flash->getMessages("frontend") ?>
-    <form action="" method="post" style="padding: 25px;">
+    <form class="fix-user" action="" method="post" style="padding: 25px;">
         <div class="form-group mb-3">
 
             <label class="label" for="name">Tên tài khoản *</label>

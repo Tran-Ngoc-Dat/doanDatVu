@@ -14,7 +14,7 @@
                         } ?> ">
                         <?php foreach ($splist as $klist => $vlist) { ?>
                             <li >
-                                <a class="has-child transition" title="<?= $vlist['name' . $lang] ?>" href="<?= $vlist[$sluglang] ?>"><?= $vlist['name' . $lang] ?></a>
+                                <a class="has-child transition" title="<?= $vlist['name'] ?>" href="<?=$configBase?><?= $vlist['slug'] ?>"><?= $vlist['name'] ?></a>
                             </li>
                         <?php } ?>
                     </ul>
