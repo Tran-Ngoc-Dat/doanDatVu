@@ -590,10 +590,6 @@
 		}
 
 		/* Valid data */
-		if(empty($data['id_permission']))
-		{
-			$response['messages'][] = 'Chưa chọn nhóm quyền';
-		}
 
 		if(empty($data['username']))
 		{

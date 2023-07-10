@@ -2,7 +2,7 @@
     if (!defined('SOURCES')) die("Error");
     /* Query allpage */
     $logo = $d->rawQueryOne("select photo from multi_media where type = 'logo'");
-    $splist = $d->rawQuery("select name,id,slug from category");
+    $splist = $d->rawQuery("select name,id,slug from category where find_in_set('hienthi',status)");
     $social = $d->rawQuery("select name,id,link,photo from multi_media where type = 'social'");
     $slider = $d->rawQuery("select name,id,link,photo from multi_media where type = 'slide'");
     $policy = $d->rawQuery("select name,id,slug from news where type = 'chinh-sacha'");
