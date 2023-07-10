@@ -104,9 +104,9 @@ $linkSave = "index.php?source=photo&act=save_photo&type=" . $type;
                                 <div class="fade show id=" tabs-lang role="tabpanel" aria-labelledby="tabs-lang">
                                     <?php if (isset($config['photo']['man_photo'][$type]['name_photo']) && $config['photo']['man_photo'][$type]['name_photo'] == true) { ?>
                                         <div class="form-group">
-                                            <label for="name">Tiêu đề ():</label>
+                                            <label for="name">Tiêu đề:</label>
                                             <input type="text" class="form-control text-sm" name="data[name]" id="name"
-                                                placeholder="Tiêu đề ()"
+                                                placeholder="Tiêu đề"
                                                 value="<?= (!empty($flash->has('name'))) ? $flash->get('name') : @$item['name'] ?>">
                                         </div>
                                     <?php } ?>

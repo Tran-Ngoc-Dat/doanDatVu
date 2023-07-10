@@ -13,6 +13,9 @@
 
                 <div class="right-pro-detail col-md-6 col-lg-7 mb-4">
                     <p class="title-pro-detail mb-2"><?= $rowDetail['name'] ?></p>
+                    <div class="danhgiasao mb-3">
+                        <div class="rate_p" data-score="<?=$rowDetail['rate']?>" data-id="<?=$rowDetail['id']?>"></div><div class="luotdanhgia">(<strong class="count_rate<?=$rowDetail['id']?>"><?=$rowDetail['count_rate']?></strong> Lượt đánh giá)</div>
+                    </div>
                     <ul class="attr-pro-detail">
                         <?php if (!empty($rowDetail['sku'])) { ?>
                         <li class="w-clear">
@@ -88,6 +91,9 @@
 
                 <div class="right-pro-detail col-md-6 col-lg-7 mb-4">
                     <p class="title-pro-detail mb-2"><?= $rowDetail['name'] ?></p>
+                    <div class="danhgiasao mb-3">
+                        <div class="rate_p" data-score="<?=$rowDetail['rate']?>" data-id="<?=$rowDetail['id']?>"></div><div class="luotdanhgia">(<strong class="count_rate<?=$rowDetail['id']?>"><?=$rowDetail['count_rate']?></strong> Lượt đánh giá)</div>
+                    </div>
                     <ul class="attr-pro-detail">
                         <?php if (!empty($rowDetail['sku'])) { ?>
                         <li class="w-clear">
