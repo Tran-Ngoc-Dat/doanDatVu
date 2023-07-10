@@ -30,7 +30,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle text-center" width="10%">STT</th>
+                        <th class="align-middle">STT</th>
                         <?php if(isset($config['photo']['man_photo'][$type]['avatar_photo']) && $config['photo']['man_photo'][$type]['avatar_photo'] == true) { ?>
                         	<th class="align-middle text-center" width="8%">Hình</th>
 				        <?php } ?>
@@ -56,7 +56,7 @@
                         <?php for($i=0;$i<count($items);$i++) { ?>
                             <tr>
                                 <td class="align-middle">
-                                    <input type="number" class="form-control form-control-mini m-auto update-numb" min="0" value="<?=$i+1?>" data-table="photo">
+                                    <a class="text-dark text-break"><?=$i+1?></a>
                                 </td>
                                 <?php if(isset($config['photo']['man_photo'][$type]['avatar_photo']) && $config['photo']['man_photo'][$type]['avatar_photo'] == true) { ?>
 	                                <td class="align-middle text-center">
