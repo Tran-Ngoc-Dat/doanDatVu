@@ -42,25 +42,25 @@
             <td><?=$v['email']?></td>
             <td>
             <?php
-                if(isset($v['order_status']) && $v['order_status'] == 0)
+                if(isset($v['order_status']) && $v['order_status'] == 1)
                 {
                     ?>
                     <span class="info-box-text text-primary font-weight-bold text-capitalize text-sm">Mới đặt</span>
             <?php } ?>
             <?php
-                if(isset($v['order_status']) && $v['order_status'] == 1)
+                if(isset($v['order_status']) && $v['order_status'] == 2)
                 {
                     ?>
                     <span class="info-box-text text-info font-weight-bold text-capitalize text-sm">Đã xác nhận</span>
             <?php } ?>
             <?php
-                if(isset($v['order_status']) && $v['order_status'] == 2)
+                if(isset($v['order_status']) && $v['order_status'] == 3)
                 {
                     ?>
                     <span class="info-box-text text-success font-weight-bold text-capitalize text-sm">Đã giao</span>
             <?php } ?>
             <?php
-                if(isset($v['order_status']) && $v['order_status'] == 3)
+                if(isset($v['order_status']) && $v['order_status'] == 4)
                 {
                     ?>
                     <span class="info-box-text text-danger font-weight-bold text-capitalize text-sm">Đã hủy</span>

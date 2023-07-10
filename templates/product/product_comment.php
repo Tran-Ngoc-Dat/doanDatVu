@@ -8,7 +8,7 @@
                 <form action="" method="POST" name="comment_product">
                     <div class="response-review"></div>
                     <div class="row">
-                        <div class="col-12 col-lg-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="review-content">Viết nhận xét của bạn vào bên dưới:</label>
                                 <textarea class="form-control text-sm" name="comment_product" id="question_member" placeholder="Nhận xét của bạn về sản phẩm này *" rows="11"></textarea>
