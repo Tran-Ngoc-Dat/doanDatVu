@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb" id="bar_breadcrumb">
     <div class="warp-content">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb fix-padding">
             <li class="breadcrumb-item">
-                <a href="index.php">Trang chủ</a>
+                <a href="<?= $configBase ?>">Trang chủ</a>
             </li>
             <li class="breadcrumb-item">
                 <a href="doi-mat-khau">Đổi mật khẩu</a>

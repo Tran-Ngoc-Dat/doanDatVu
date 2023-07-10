@@ -1,7 +1,5 @@
 <?php
-if ($source == 'gio-hang') {
-    if (array_key_exists($loginMember, $_SESSION) && $_SESSION[$loginMember]['active'] == true)  {
-        $func->dump($_SESSION[$loginMember]);die('xxx');
+
         if (!defined('SOURCES')) die("Error");
         if (!empty($_POST['dataOrder']['fullname'])) {
 
@@ -78,6 +76,8 @@ if ($source == 'gio-hang') {
             unset($_SESSION['cart']);
             $func->transfer("Đặt hàng thành công", $configBase);
         }
-    }else
-    $func->transfer("Bạn vui lòng đăng nhập để có thể mua hàng!", "index/index", false);
-}
+// if ($source == 'gio-hang') {
+//     if (array_key_exists($loginMember, $_SESSION) && $_SESSION[$loginMember]['active'] == true)  {
+//     }else
+//     $func->transfer("Bạn vui lòng đăng nhập để có thể mua hàng!", "index/index", false);
+// }

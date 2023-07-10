@@ -48,14 +48,6 @@ $requick = array(
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "tuyen-dung", "type" => "tuyen-dung"),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "gioi-thieu", "type" => "gioi-thieu"),
 	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "dich-vu", "type" => "dich-vu"),
-	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "bao-duong", "type" => "bao-duong"),
-	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "khach-hang", "type" => "khach-hang"),
-
-	/* Hướng dẫn mua hàng */
-	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "cau-hoi-thuong-gap", "type" => "cau-hoi-thuong-gap"),
-
-	/* Chính sách */
-	array("tbl" => "news", "field" => "id", "source" => "news", "com" => "chinh-sacha", "type" => "chinh-sacha"),
 
 );
 /* Find data */
@@ -110,28 +102,34 @@ switch ($com) {
 	$type = $com;
 	$titleMain = "Tuyển dụng";
 	break;
+
 	case 'lien-he':
 	$source = "contact";
 	$template = "contact/contact";
 	$titleMain = "Liên hệ";
 	break;
+
 	case 'tim-kiem':
 	$source = "search";
 	$template = "product/product";
 	$titleMain = "Tìm kiếm";
 	break;
+
 	case 'gio-hang':
 	$source = "order";
 	$template = 'order/order';
 	$titleMain = "Giỏ hàng";
 	break;
+
 	case 'account':
 	$source = "user";
 	break;
+
 	case 'index':
 	$source = "index";
 	$template = "index/index";
 	break;
+	
 	case 'login':
 	$source = "login";
 	$template = "account/login";

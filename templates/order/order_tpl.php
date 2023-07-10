@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bottom-cart col-12 col-lg-12">
+                <div class="mt-3 bottom-cart col-12 col-lg-12">
                     <div class="section-cart">
                         <p class="title-cart">Thông tin nhận hàng:</p>
                         <div class="information-cart">
@@ -102,7 +102,7 @@
                                     <input type="number" class="form-control text-sm" id="phone" name="dataOrder[phone]" placeholder="Số điện thoại" value="<?= (!empty($flash->has('phone'))) ? $flash->get('phone') : $userDetail['phone'] ?>" required />
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="form-row row">
                             <div class="input-cart col-md-6">
                                     <input type="email" class="form-control text-sm" id="email" name="dataOrder[email]" placeholder="Email" value="<?= (!empty($flash->has('email'))) ? $flash->get('email') : $userDetail['email'] ?>" required />
                                 </div>

@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb" id="bar_breadcrumb">
     <div class="warp-content">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb fix-padding">
             <li class="breadcrumb-item">
-                <a href="index.php">Trang chủ</a>
+                <a href="<?=$configBase?>">Trang chủ</a>
             </li>
             <li class="breadcrumb-item">
                 <a href="#">Đăng nhập</a>
@@ -17,7 +17,7 @@
             
         </div>
         <?= $flash->getMessages("frontend") ?>
-        <form action="" name="login-user" method="post" style="padding: 25px;">
+        <form class="fix-user" action="" name="login-user" method="post" style="padding: 25px;">
             <div class="form-group mb-3">
             
             <label class="label" for="name">Tên tài khoản hoặc địa chỉ email *</label>
