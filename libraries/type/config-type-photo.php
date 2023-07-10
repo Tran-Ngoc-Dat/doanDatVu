@@ -59,10 +59,15 @@
     /* Video */
     $nametype = "video";
     $config['photo']['man_photo'][$nametype]['title_main_photo'] = "Video";
-    $config['photo']['man_photo'][$nametype]['check_photo'] = array("noibat" => "Nổi bật", "hienthi" => "Hiển thị");
+    $config['photo']['man_photo'][$nametype]['check_photo'] = array("hienthi" => "Hiển thị");
     $config['photo']['man_photo'][$nametype]['number_photo'] = 2;
     $config['photo']['man_photo'][$nametype]['video_photo'] = true;
     $config['photo']['man_photo'][$nametype]['name_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['images_photo'] = true;
+    $config['photo']['man_photo'][$nametype]['width_photo'] = 825;
+    $config['photo']['man_photo'][$nametype]['height_photo'] = 200;
+    $config['photo']['man_photo'][$nametype]['thumb_photo'] = '825x200x1';
+    $config['photo']['man_photo'][$nametype]['img_type_photo'] = '.jpg|.gif|.png|.jpeg|.gif';
 
     /* Đối tác */
     $nametype = "doitac";

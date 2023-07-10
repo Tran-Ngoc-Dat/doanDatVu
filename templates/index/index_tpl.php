@@ -196,8 +196,8 @@
                                 <img src="upload/news/<?= $v['photo'] ?>" alt="" width="182" height="140">
                             </a>
                             <div class="item-news">
-                                <div class="title-name-news"><a class="text-split text-decoration-none" href="<?= $v['slug'] ?>"
-                                        title="<?= $v['name'] ?>"><?= $v['name'] ?></a></div>
+                                <div class="title-name-news"><a class="text-split text-decoration-none"
+                                        href="<?= $v['slug'] ?>" title="<?= $v['name'] ?>"><?= $v['name'] ?></a></div>
                                 <p class="text-split"><?= $v['description'] ?></p>
                             </div>
                         </div>
@@ -208,9 +208,18 @@
             <div class="news-right">
                 <div class="title-news fix-video">
                     <span>Video nổi bật</span>
-                    <a href="video" class="text-decoration-none">Xem thêm</a>
+                    <a class="text-decoration-none">Xem thêm</a>
                 </div>
-				<img src="./assets/images/zero/img_video.jpg" alt="video">
+                <div class="video-image">
+                    <div class="item-video" data-fancybox="video" data-src="<?= $configBase ?>?= $video[0]['link_video'] ?>">
+                        <a class="hover-img" href="<?= $video[0]['link_video'] ?>"
+                            title="<?= $video[0]['name'] ?>" data-fancybox="video"
+                            data-src="<?=$video[0]['link_video']?>">
+                            <img src="<?= $configBase ?>upload/photo/<?= $video[0]['photo'] ?>" alt="" width="825"
+                                height="200">
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

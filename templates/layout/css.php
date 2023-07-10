@@ -13,3 +13,4 @@
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/slick/slick-style.css"/>
 <link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="<?=$configBase?>assets/js/raty/jquery.raty.css"/>

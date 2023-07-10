@@ -336,3 +336,31 @@ if(isExist($(".menu-page")))
 	});
 }
 
+$('.rate_p').raty({
+	half     : true,
+	path     : null,
+	starHalf : './assets/js/raty/images/star-half3.png',
+	starOff  : './assets/js/raty/images/star-off3.png',
+	starOn   : './assets/js/raty/images/star-on3.png',
+	score: function() {
+		return $(this).attr('data-score');
+	},
+	click: function(score, evt) {
+		var id=$(this).attr('data-id');
+		var integer = parseInt(score, 10),
+		decimal = (score - integer) * 10;
+		if (decimal !== 0) {
+			decimal = (decimal > 5) ? 1 : 0.5;
+		}
+		score = integer + decimal;
+		$.ajax({
+			type:'POST',
+			data:{score:score,id:id},
+			dataType: 'JSON',
+			url:'api/api_rating.php',
+			success:function(data){
+				$('.count_rate'+id).html(data.count);
+			}
+		})
+	}
+});
