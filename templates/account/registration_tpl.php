@@ -59,10 +59,10 @@
             <input type="email" class="form-control text-sm" id="email" name="email" placeholder="Nhập email" required="">
             <div class="invalid-feedback">Vui lòng nhập email</div>
         </div>
-        <div class="form-group mb-3">
+        <!-- <div class="form-group mb-3">
             <label class="label" for="name">PHOTO *</label>
             <input type="file" name="file" id="file-zone">
-        </div>
+        </div> -->
         
         <div class="button-user d-flex align-items-center justify-content-between">
             <button type="submit" class="btn form-control btn-primary rounded submit px-3" name="register-user" value="1">Đăng ký</button>

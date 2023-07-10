@@ -67,7 +67,7 @@
             <?php } ?>
             </td>
             <td><?=$func->formatMoney($v['total_price']);?></td>
-            <td><?=date('d/m/Y',$v['total_price']);?></td>
+            <td><?=date('d/m/Y',$v['date_created']);?></td>
         </tr>
     <?php } ?>
   </tbody>
