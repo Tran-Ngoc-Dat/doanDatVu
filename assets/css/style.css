@@ -874,7 +874,7 @@ img:not([src]) {
 .header { position: relative; }
 .menu { display: flex; justify-content: space-between; align-items: center; }
 .menu-l { position: absolute; }
-.col-left { background-color: #0000; width: 24%; border-left: 1px solid #ffffff50; border-right: 1px solid #ffffff50; }
+.col-left { background-color: #0000; width: 23.2%; border-left: 1px solid #ffffff50; border-right: 1px solid #ffffff50; }
 .fix-menu { max-width: 260px; }
 .fix-slide { padding: 10px !important; }
 .fix-menu-left { right: 30px; }
@@ -1120,7 +1120,7 @@ img:not([src]) {
 }
 
 .slideshow-image img {
-	height: 600px;
+	height: 650px;
 	width: 100%;
 }
 
@@ -1944,7 +1944,7 @@ img:not([src]) {
 }
 
 .product-left {
-	width: 23.8%;
+	width: 23.2%;
 	position: sticky;
 	top: 0;
 	left: 0;

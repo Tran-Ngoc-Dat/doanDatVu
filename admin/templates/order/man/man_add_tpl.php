@@ -62,10 +62,10 @@ $linkSave = "index.php?source=order&act=save";
 					<p>
 						<select name="data[order_status]" id="order_status" class="select2 w-100" style="width: 300px;">
 						<option value="" disabled>Trạng thái đơn hàng</option>
-						<option value="0" <?=( @$item['order_status'] == 0 ? 'selected' : '')?> <?=( @$item['order_status'] > 0 ? 'disabled' : '')?>>Mới đặt</option>
-						<option value="1" <?=( @$item['order_status'] == 1 ? 'selected' : '')?> <?=( @$item['order_status'] > 1 ? 'disabled' : '')?>>Đã xác nhận</option>
-						<option value="2" <?=( @$item['order_status'] == 2 ? 'selected' : '')?> <?=( @$item['order_status'] > 2 ? 'disabled' : '')?>>Đã giao</option>
-						<option value="3" <?=( @$item['order_status'] == 3 ? 'selected' : '')?> <?=( @$item['order_status'] == 2 ? 'disabled' : '')?>>Đã hủy</option>
+						<option value="1" <?=( @$item['order_status'] == 1 ? 'selected' : '')?> <?=( @$item['order_status'] > 1 ? 'disabled' : '')?>>Mới đặt</option>
+						<option value="2" <?=( @$item['order_status'] == 2 ? 'selected' : '')?> <?=( @$item['order_status'] > 2 ? 'disabled' : '')?>>Đã xác nhận</option>
+						<option value="3" <?=( @$item['order_status'] == 3 ? 'selected' : '')?> <?=( @$item['order_status'] > 3 ? 'disabled' : '')?>>Đã giao</option>
+						<option value="4" <?=( @$item['order_status'] == 4 ? 'selected' : '')?> <?=( @$item['order_status'] == 4 ? 'disabled' : '')?>>Đã hủy</option>
 					</select>
 					</p>
 				</div>

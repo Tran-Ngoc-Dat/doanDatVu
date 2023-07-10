@@ -1148,6 +1148,14 @@ $(document).ready(function(){
 		}
 	});
 
+	$('body').on("change",".select-order",function() {
+		var order_status = $(this).val();
+		if(order_status > 0){
+			window.location.href = CONFIG_BASE + "admin/" +LINK_FILTER  +"&order_status="+order_status;
+		}
+	});
+
+
 	/* PhotoZone */
 	if($("#photo-zone").length)
 	{
