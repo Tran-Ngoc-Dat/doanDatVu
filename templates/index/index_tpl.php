@@ -2,7 +2,9 @@
     <div class="wrap-content">
         <div class="box-product">
             <div class="product-left">
-                <?php if (!empty($productlist)) { ?>
+                <?php if (!empty($productlist)) { 
+                    // $func->dump($productlist);    
+                ?>
                 <div class="product-top">
                     <p>Danh mục sản phẩm</p>
                     <ul class="pro-list scrollbar" id="style-2">
@@ -73,7 +75,7 @@
 </div>
 <?php } ?>
 
-<?php if (count($productlist)) { ?>
+<?php if (!empty($productlist)) { ?>
 <div class="wrap-productnb">
     <div class="wrap-content">
         <?php foreach ($productlist as $vlist) { 
@@ -140,9 +142,9 @@
         <div class="slide-criteria none">
             <?php foreach ($criteria as $v) { ?>
             <div>
-                <div class="box-criteria">
+                <div class="box-criteria hrv-rotateY">
                     <div class="img-criteria">
-                        <a class="hrv-rotateY">
+                        <a class="">
                             <img src="<?= $configBase ?>upload/news/<?= $v['photo'] ?>" alt="" width="40" height="40">
                         </a>
                         <span class="text-split"><?= $v['name'] ?></span>

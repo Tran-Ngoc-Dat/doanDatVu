@@ -13,6 +13,7 @@
 <script type="text/javascript" src="<?=$configBase?>assets/js/functions.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/confirm/confirm.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/magiczoomplus/magiczoomplus.js"></script>
+<script type="text/javascript" src="<?=$configBase?>assets/bootstrap/bootstrap.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/ion.rangeSlider/ion.rangeSlider.js"></script>
 <script type="text/javascript" src="<?=$configBase?>assets/js/apps.js?v=1.1"></script>
 

@@ -66,7 +66,7 @@
 					</div>
 					<div class="form-group col-md-4">
 						<label for="birthday">Ngày sinh:</label>
-						<input type="text" class="form-control text-sm max-date" name="data[birthday]" id="birthday" placeholder="Ngày sinh" value="<?=(!empty($flash->has('birthday'))) ? $flash->get('birthday') : @$item['birthday']?>" required autocomplete="off">
+						<input type="text" class="form-control text-sm max-date" name="data[birthday]" id="birthday" placeholder="Ngày sinh" value="<?= (!empty($flash->has('birthday'))) ? date("d/m/Y", $flash->get('birthday')) : ((!empty($item['birthday'])) ? date("d/m/Y", $item['birthday']) : '') ?>" required autocomplete="off">
 					</div>
 					<div class="form-group col-md-4">
 						<label for="address">Địa chỉ:</label>

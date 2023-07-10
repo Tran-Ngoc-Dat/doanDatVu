@@ -1,5 +1,4 @@
 <?php
-    /* Config type - Group */
 
     /* Config type - Product */
     require_once LIBRARIES.'type/config-type-product.php';

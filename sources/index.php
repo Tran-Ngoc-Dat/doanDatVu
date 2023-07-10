@@ -1,7 +1,8 @@
 <?php  
 if(!defined('SOURCES')) die("Error");
 
-$productlist = $d->rawQuery("select name,id,slug,photo from category order by id desc");
+$productlist = $d->rawQuery("select name,id,slug,photo from category where find_in_set('hienthi',status) order by id desc");
+
 $intro = $d->rawQuery("select name, photo, slug, id, description from #_news where type = 'gioi-thieu' order by id desc limit 1");
 $imggt = $d->rawQueryOne("select photo from multi_media where type = 'img-gt'");
 $imgtc = $d->rawQueryOne("select photo from multi_media where type = 'img-tc'");
@@ -25,7 +26,6 @@ $promotion = $d->rawQuery("select name, photo, slug, id, regular_price, sale_pri
     // $question = $d->rawQuery("select name, photo, slug, id, date_created from #_news where type = 'cau-hoi' and find_in_set('hienthi',status) order by id desc");
 
 
-$productlist = $d->rawQuery("select name,id,slug from category");
 $newdv = $d->rawQuery("select name, photo, slug, id, date_created, description from #_news where type = 'dich-vu' order by id desc");
 
 ?>

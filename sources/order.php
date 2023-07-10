@@ -1,6 +1,7 @@
 <?php
 if ($source == 'gio-hang') {
     if (array_key_exists($loginMember, $_SESSION) && $_SESSION[$loginMember]['active'] == true)  {
+        $func->dump($_SESSION[$loginMember]);die('xxx');
         if (!defined('SOURCES')) die("Error");
         if (!empty($_POST['dataOrder']['fullname'])) {
 
@@ -11,7 +12,7 @@ if ($source == 'gio-hang') {
         
             /* Data */
             $dataOrder = (!empty($_POST['dataOrder'])) ? $_POST['dataOrder'] : null;
-        
+            
             /* Check data */
             if (!empty($dataOrder)) {
                 /* Info */
