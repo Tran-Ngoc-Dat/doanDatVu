@@ -32,6 +32,7 @@
       <th scope="col">Tình trạng</th>
       <th scope="col">Tổng tiền</th>
       <th scope="col">Ngày đặt</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -68,6 +69,14 @@
             </td>
             <td><?=$func->formatMoney($v['total_price']);?></td>
             <td><?=date('d/m/Y',$v['date_created']);?></td>
+            <td>
+                <?php if(isset($v['order_status']) && $v['order_status'] < 3){?>
+                    <a href="huy-don-hang?id=<?=$v['id']?>" class="btn btn-danger">Hủy</a>
+                <?php } ?>
+                <?php if(isset($v['order_status']) && $v['order_status'] > 3) { ?>
+                    <a class="btn btn-secondary">Hủy</a>
+                 <?php } ?>
+            </td>
         </tr>
     <?php } ?>
   </tbody>

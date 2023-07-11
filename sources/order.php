@@ -34,6 +34,7 @@
                 $data_donhang['notes'] = $requirements;
                 $data_donhang['code'] = $code;
                 $data_donhang['total_price'] = $total_price;
+                $data_donhang['order_status'] = 1;
                 $data_donhang['date_created'] = time();
                 $insert_order = $d->insert('`order`', $data_donhang);
                 /* Cart */

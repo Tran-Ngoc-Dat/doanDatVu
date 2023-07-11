@@ -44,6 +44,10 @@ switch ($action) {
         $titleMain = "Chi tiết đơn hàng";
         $order_detail = $d->rawQuery("select * from `order_detail` where id_order = ".$_GET['id']);
         break;
+    case 'huy-don-hang':
+        if (empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại", $configBase, false);
+        deleteOrder();
+        break;
     default:
         header('HTTP/1.0 404 Not Found', true, 404);
         include("404.php");
@@ -317,6 +321,40 @@ function changepassword()
         $func->transfer("Trang không tồn tại", $configBase, false);
     }
     
+}
+
+function deleteOrder() 
+{
+    global $d, $func, $loginMember, $configBase;
+    
+    $id = (!empty($_GET['id'])) ? htmlspecialchars($_GET['id']) : 0;
+
+	if($id)
+	{
+	    $row = $d->rawQueryOne("select id from `order` where id = ? and id_user = ".$_SESSION[$loginMember]['id']." limit 0,1",array($id));
+
+	    if(!empty($row))
+		{   $data = array();
+            $data["order_status"] = 4;
+            $d->where('id', $id);
+			if($d->update('`order`',$data))
+			{
+				$func->transfer("Hủy đơn hàng thành công", $configBase . "account/don-hang-cua-ban");
+			}
+			else
+			{
+				$func->transfer("Hủy đơn hàng bị lỗi", $configBase . "account/don-hang-cua-ban",false);
+			}
+		}
+		else
+		{
+			$func->transfer("Không tồn tại đơn hàng này", $configBase . "account/don-hang-cua-ban",false);
+		}
+	}
+	else
+	{
+		$func->transfer("Hủy đơn hàng bị lỗi", $configBase . "account/don-hang-cua-ban",false);
+	}
 }
 
 //Send mail 
