@@ -28,9 +28,9 @@
             <div class="card-body pt-5 pb-3">
                 <?php if (!empty($commentList)) { ?>
                     <?php foreach ($commentList as $v) {
-                            $userName = $d->rawQuery("select fullname from #_user where id = ?", array($v['id_user']));
-                            ?>
-                        <div class="media-body">
+                        $userName = $d->rawQuery("select fullname from #_user where id = ?", array($v['id_user']));
+                    ?>
+                        <!-- <div class="media-body">
                             <div class="well well-lg" style="border: solid 1px gray;border-radius: 9px;padding: 10px;">
                                 <div>
                                     <h6 class="media-heading text-uppercase reviews"> <?= $userName[0]['fullname'] ?> </h6>
@@ -40,11 +40,26 @@
                                     <?= $v['content'] ?>
                                 </p>
                             </div>
+                        </div> -->
+                        <div class="card-body" style="border: solid 1px gray;border-radius: 9px;height:120px;">
+                            <div class="d-flex flex-start align-items-center">
+
+                                <div>
+                                    <h6 class="fw-bold text-primary mb-1"><?= $userName[0]['fullname'] ?></h6>
+                                    <p class="text-muted small mb-0">
+                                        <?= $func->makeDate($v['date_comment']) ?>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="mt-3 mb-4 pb-2">
+                                <?= $v['content'] ?>
+                            </p>
                         </div>
-                    <?php } ?>
-                <?php } ?>
-                
             </div>
+        <?php } ?>
+    <?php } ?>
+
         </div>
     </div>
 </div>
