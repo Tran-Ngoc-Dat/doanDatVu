@@ -33,11 +33,6 @@ $linkSave = "index.php?source=order&act=save";
 					<p class="text-primary"><?= @$item['code'] ?></p>
 				</div>
 				<div class="form-group col-md-4 col-sm-6">
-					<label>Hình thức thanh toán:</label>
-					<?php $order_payment = $func->getInfoDetail('namevi', 'news', @$item['order_payment']); ?>
-					<p class="text-info"><?= $order_payment['namevi'] ?></p>
-				</div>
-				<div class="form-group col-md-4 col-sm-6">
 					<label>Họ tên:</label>
 					<p class="font-weight-bold text-uppercase text-success"><?= @$item['fullname'] ?></p>
 				</div>

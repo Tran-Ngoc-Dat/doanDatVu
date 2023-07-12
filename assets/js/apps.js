@@ -127,10 +127,10 @@ $(document).ready(function () {
 		hasGrid: true
 	});
 
-	loadPaging("api/product.php?perpage=8", '.paging-product');
+	loadPaging("api/product.php?perpage=6", '.paging-product');
 	$(".paging-product-category").each(function () {
 		var list = $(this).data("list");
-		loadPaging("api/product.php?perpage=8&idList=" + list, '.paging-product-category-' + list);
+		loadPaging("api/product.php?perpage=6&idList=" + list, '.paging-product-category-' + list);
 	})
 
 	/* Products */
@@ -335,6 +335,19 @@ if(isExist($(".menu-page")))
 		{
 			$(".menu-page").removeClass('menu-fix');
 		}
+	});
+}
+
+if (isExist($('[data-fancybox="video"]'))) {
+	$('[data-fancybox="video"]').fancybox({
+		transitionEffect: 'fade',
+		transitionDuration: 800,
+		animationEffect: 'fade',
+		animationDuration: 800,
+		arrows: true,
+		infobar: false,
+		toolbar: true,
+		hash: false
 	});
 }
 
