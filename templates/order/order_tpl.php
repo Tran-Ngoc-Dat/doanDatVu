@@ -27,6 +27,7 @@
                             $proinfo = $cart->getProductInfo($pid);
                             $pro_price = $proinfo['regular_price'];
                             $pro_price_new = $proinfo['sale_price'];
+                            $inventory = $proinfo['inventory'];
                             $pro_price_qty = $pro_price * $quantity;
                             $pro_price_new_qty = $pro_price_new * $quantity; ?>
                             <div class="procart procart-<?= $code ?>">
@@ -61,7 +62,7 @@
                                         </div>
                                         <div class="quantity-counter-procart quantity-counter-procart-<?= $code ?>">
                                             <span class="counter-procart-minus counter-procart">-</span>
-                                            <input type="number" class="quantity-procart" min="1" value="<?= $quantity ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" />
+                                            <input type="number" class="quantity-procart" min="1" value="<?= $quantity?>" data-inventory="<?= $inventory ?>" data-pid="<?= $pid ?>" data-code="<?= $code ?>" />
                                             <span class="counter-procart-plus counter-procart">+</span>
                                         </div>
                                     </div>
@@ -118,11 +119,11 @@
                     </div>
                 </div>
             <?php } else { ?>
-                <a href="" class="empty-cart text-decoration-none w-100">
+                <div class="empty-cart text-decoration-none w-100">
                     <i class="fa-duotone fa-cart-xmark"></i>
                     <p>Không có sản phẩm trong giỏ</p>
-                    <span class="btn btn-warning">Về trang chủ</span>
-                </a>
+                    <a href="<?=$configBase?>"><span class="btn btn-warning">Về trang chủ</span></a>
+                </div>
             <?php } ?>
         </div>
     </div>
