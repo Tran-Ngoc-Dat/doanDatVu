@@ -1,7 +1,11 @@
 <?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+    
+    if (!defined('SOURCES')) die("Error");
     if ($com == 'gio-hang') {
     if (array_key_exists($loginMember, $_SESSION) && $_SESSION[$loginMember]['active'] == true)  {
-        if (!defined('SOURCES')) die("Error");
         if (!empty($_POST['dataOrder']['fullname'])) {
 
             /* Check order */
@@ -74,9 +78,114 @@
                     }
                 }
             }
-            /* Xóa giỏ hàng */
-            unset($_SESSION['cart']);
-            $func->transfer("Đặt hàng thành công", $configBase);
+            if($error != true){
+        
+                require 'vendor/autoload.php';
+                $mail = new PHPMailer(true);
+                try {
+                    //Server settings
+                    $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                    $mail->isSMTP();                                            //Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                    $mail->Username   = 'herrytran147@gmail.com';                     //SMTP username
+                    $mail->Password   = 'bixioushqugaskph';                               //SMTP password
+                    $mail->SMTPSecure = 'tls';          //Enable implicit TLS encryption
+                    $mail->Port       = 587;
+                    $mail->CharSet = "utf-8";                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+                    //Recipients
+                    $mail->setFrom('from@example.com', 'Mailer');   //Add a recipient
+                    $mail->addAddress($email);               //Name is optional
+                    
+                    // Body
+                    $body = '<table border="0" width="100%">';
+                $body .= '
+                        <tr>
+                            <th align="left" colspan="2">
+                            <table width="100%">
+                            <tr>
+                            <td><font size="4">Thông tin đặt hàng từ website <a href="http://'.$configUrl.'">'.$configUrl.'</a></font> 
+                            </td>
+                            </table>
+                            
+                            </th>
+                        </tr>
+                        <tr>
+                            <th width="30%" align="left">Họ tên :</th>
+                            <td>&nbsp; '.$fullname.'</td>
+                        </tr>
+                        
+                        <tr>
+                            <th align="left">Email :</th>
+                            <td>&nbsp; '.$email.'</td>
+                        </tr>
+                        <tr>
+                            <th align="left">Điện thoại :</th>
+                            <td>&nbsp; '.$phone.'</td>
+                        </tr>
+                        <tr>
+                            <th align="left">Địa chỉ:</th>
+                            <td>&nbsp; '.$address.'</td>
+                        </tr>
+                        
+                        <tr>
+                            <th align="left">Nội dung :</th>
+                            <td >&nbsp; '.$requirements.'</td>
+                        </tr>
+                        <tr>
+                            <th align="left" colspan="2">&nbsp;</th>
+                        </tr>
+                        ';
+                $body .= '</table>';
+          
+        
+                $body.='<table border="0" cellpadding="5px" cellspacing="1px" style="font-size:12px; background:#FFF; width:100%;">';
+        
+        
+                    if(is_array($_SESSION['cart']))
+                    {
+                        $body.='<tr style="background:#274392; font-weight:bold; color:#FFF; border-left:1px solid #CCC; border-right:1px solid #CCC;"><th style="padding:5px; width:5%; text-align:center;">STT</th><th style="padding:5px; width:10%; text-align:center;">Mã đơn hàng</th><th style="padding:5px; width:45%; text-align:center;">Sản phẩm</th><th style="padding:5px; width:15%; text-align:center;">Giá</th><th style="padding:5px; width:10%; text-align:center;">Số lượng</th><th style="padding:5px; width:15%; text-align:center;">Thành tiền</th></tr>';
+                        $max=count($_SESSION['cart']);
+                        for($i=0;$i<$max;$i++){
+                            $pid=$_SESSION['cart'][$i]['productid'];
+                            $q=$_SESSION['cart'][$i]['qty'];
+                            $pDetail = $d->rawQueryOne("select * from #_product where id = ? limit 0,1", array($pid));
+        
+                            if($q==0) continue;
+                            $body.='<tr><td>'.($i+1).'</td>';
+                            $body.='<td>'.$pDetail['code'].'&nbsp;</td>';
+                            $body.='	<p><a href="http://'.$configUrl.$pDetail['slug'].'" target="_blank">'.$pDetail['name'].'</a></p>';
+                            $body.='</td>';
+                            $body.='<td>'.number_format($pDetail['sale_price'],0, ',', '.').'&nbsp;đ</td>';
+                            $body.='<td>'.$q.'</td>';                 
+                            $body.='<td>'.number_format($pDetail['sale_price']*$q,0, ',', '.') .'&nbsp;đ</td>
+                            </tr>';
+                        }
+                        $body.='<tr><td colspan="6">
+                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            Tổng giá trị đơn hàng: '.$total_price.'
+                         </table>
+                        </td></tr>';
+                    }
+                    else{
+                        $body.='<tr bgColor="#FFFFFF"><td>There are no items in your shopping cart!</td>';
+                    }
+               $body.=' </table> '; 
+        
+                    //Content
+                    $mail->isHTML(true);                                  //Set email format to HTML
+                    $mail->Subject = 'Đơn hàng '.$code;
+                    $mail->Body    = $body;
+                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        
+                    $mail->send();
+                    unset($_SESSION['cart']);
+                    $func->transfer("Đặt hàng thành công", $configBase);
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
         }
 
     }else
