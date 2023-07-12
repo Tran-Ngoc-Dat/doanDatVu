@@ -200,9 +200,11 @@ $(document).ready(function () {
 		var input = $button.parent().find('input');
 		var id = input.data('pid');
 		var code = input.data('code');
+		var inventory = input.data('inventory');
 		var oldValue = $button.parent().find('input').val();
 		if ($button.text() == '+') quantity = parseFloat(oldValue) + 1;
 		else if (oldValue > 1) quantity = parseFloat(oldValue) - 1;
+		if(quantity >= inventory) quantity = 1;
 		$button.parent().find('input').val(quantity);
 		updateCart(id, code, quantity);
 	});
