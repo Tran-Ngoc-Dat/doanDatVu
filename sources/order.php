@@ -50,6 +50,11 @@
                     $flags = -1;
                     /* Kiểm tra số lượng tồn */
                     $rowDetail = $d->rawQueryOne("select id, name, inventory from #_product where id = ? limit 0,1", array($pid));
+                    if($q >= $rowDetail['inventory']) {
+                        unset($_SESSION['cart'][$i]);
+                        $d->rawQuery("delete from `order` where id = ?", array($insert_order));
+                        $func->transfer("".$rowDetail['name']."Đã vượt quá số lượng mua", $configBase."gio-hang",false);
+                    }
                     $inventoryed = 0;
                     $inventoryed = $rowDetail['inventory'] - $q;
                     if($inventoryed >= 0){
@@ -59,7 +64,7 @@
                         $error = true;
                         unset($_SESSION['cart'][$i]);
                         $d->rawQuery("delete from `order` where id = ?", array($insert_order));
-                        $func->transfer("".$rowDetail['name']." không đủ số lượng tồn kho, bạn vui lòng liên hệ quản trị viên website để được giải quyết", $configBase."lien-he");
+                        $func->transfer("".$rowDetail['name']." không đủ số lượng tồn kho, bạn vui lòng liên hệ quản trị viên website để được giải quyết", $configBase."lien-he",false);
                     }
                 }
                 if($error != true){
