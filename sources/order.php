@@ -35,8 +35,8 @@
                 $data_donhang['id_user'] = $userDetail['id'];
                 $data_donhang['email'] = $email;
                 $data_donhang['phone'] = $phone;
+                $data_donhang['address'] = $address;
                 $data_donhang['notes'] = $requirements;
-                $data_donhang['code'] = $code;
                 $data_donhang['total_price'] = $total_price;
                 $data_donhang['order_status'] = 1;
                 $data_donhang['date_created'] = time();
@@ -57,7 +57,7 @@
                     if($q >= $rowDetail['inventory']) {
                         unset($_SESSION['cart'][$i]);
                         $d->rawQuery("delete from `order` where id = ?", array($insert_order));
-                        $func->transfer("".$rowDetail['name']."Đã vượt quá số lượng mua", $configBase."gio-hang",false);
+                        $func->transfer("".$rowDetail['name']."Đã vượt quá số lượng mua", $configBase."san-pham",false);
                     }
                     $inventoryed = 0;
                     $inventoryed = $rowDetail['inventory'] - $q;
@@ -68,7 +68,7 @@
                         $error = true;
                         unset($_SESSION['cart'][$i]);
                         $d->rawQuery("delete from `order` where id = ?", array($insert_order));
-                        $func->transfer("".$rowDetail['name']." không đủ số lượng tồn kho, bạn vui lòng liên hệ quản trị viên website để được giải quyết", $configBase."lien-he",false);
+                        $func->transfer("".$rowDetail['name']." không đủ số lượng tồn kho, bạn vui lòng liên hệ quản trị viên website để được giải quyết", $configBase."index",false);
                     }
                 }
                 if($error != true){
@@ -150,16 +150,14 @@
         
                     if(is_array($_SESSION['cart']))
                     {
-                        $body.='<tr style="background:#274392; font-weight:bold; color:#FFF; border-left:1px solid #CCC; border-right:1px solid #CCC;"><th style="padding:5px; width:5%; text-align:center;">STT</th><th style="padding:5px; width:10%; text-align:center;">Mã đơn hàng</th><th style="padding:5px; width:45%; text-align:center;">Sản phẩm</th><th style="padding:5px; width:15%; text-align:center;">Giá</th><th style="padding:5px; width:10%; text-align:center;">Số lượng</th><th style="padding:5px; width:15%; text-align:center;">Thành tiền</th></tr>';
+                        $body.='<tr style="background:#ff0000; font-weight:bold; color:#FFF; border-left:1px solid #CCC; border-right:1px solid #CCC;"><th style="padding:5px; width:5%; text-align:center;">STT</th><th style="padding:5px; width:10%; text-align:center;">Mã đơn hàng</th><th style="padding:5px; width:45%; text-align:center;">Sản phẩm</th><th style="padding:5px; width:15%; text-align:center;">Giá</th><th style="padding:5px; width:10%; text-align:center;">Số lượng</th><th style="padding:5px; width:15%; text-align:center;">Thành tiền</th></tr>';
                         $max=count($_SESSION['cart']);
                         for($i=0;$i<$max;$i++){
                             $pid=$_SESSION['cart'][$i]['productid'];
                             $q=$_SESSION['cart'][$i]['qty'];
                             $pDetail = $d->rawQueryOne("select * from #_product where id = ? limit 0,1", array($pid));
-        
                             if($q==0) continue;
-                            $body.='<tr><td>'.($i+1).'</td>';
-                            $body.='<td>'.$pDetail['code'].'&nbsp;</td>';
+                            $body.='<tr style="text-align:center;><td>'.($i+1).'</td>';
                             $body.='	<p><a href="http://'.$configUrl.$pDetail['slug'].'" target="_blank">'.$pDetail['name'].'</a></p>';
                             $body.='</td>';
                             $body.='<td>'.number_format($pDetail['sale_price'],0, ',', '.').'&nbsp;đ</td>';

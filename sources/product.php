@@ -52,9 +52,7 @@
 		/* Lấy tất cả sản phẩm */
 		$where = "";
 		$where = "id <> 0 and find_in_set('hienthi',status)";
-		if($com == 'san-pham-ban-chay'){
-			$where .= " and find_in_set('banchay',status)";
-		}
+		
 		$curPage = $getPage;
 		$perPage = 20;
 		$startpoint = ($curPage * $perPage) - $perPage;
