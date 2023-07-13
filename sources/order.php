@@ -156,7 +156,6 @@
                             $pid=$_SESSION['cart'][$i]['productid'];
                             $q=$_SESSION['cart'][$i]['qty'];
                             $pDetail = $d->rawQueryOne("select * from #_product where id = ? limit 0,1", array($pid));
-                            $func->dump($pDetail_code);die('xxx');
                             if($q==0) continue;
                             $body.='<tr style="text-align:center;><td>'.($i+1).'</td>';
                             $body.='	<p><a href="http://'.$configUrl.$pDetail['slug'].'" target="_blank">'.$pDetail['name'].'</a></p>';
