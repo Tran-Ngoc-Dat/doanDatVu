@@ -29,11 +29,12 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item"><a class="nav-link " href="index.php?source=product&act=category"
-                                    title="Danh mục sản phẩm"><i class="nav-icon text-sm far fa-caret-square-right"></i>
+                                    title="Danh mục sản phẩm">
+                            <i class="nav-icon text-sm fas fa-boxes"></i>
                                     <p>Danh mục sản phẩm</p>
                                 </a></li>
                             <li class="nav-item"><a class="nav-link" href="index.php?source=product&act=man"
-                                    title="Sản phẩm"><i class="nav-icon text-sm far fa-caret-square-right"></i>
+                                    title="Sản phẩm"><i class="nav-icon text-sm fas fa-box"></i>
                                     <p>Sản phẩm</p>
                                 </a></li>
                         </ul>
@@ -42,7 +43,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?source=order&act=man" title="Quản lý đơn hàng">
-                        <i class="nav-icon text-sm fas fa-shopping-bag"></i>
+                        <i class="nav-icon text-sm fas fa-shopping-cart"></i>
                         <p>Quản lý đơn hàng</p>
                     </a>
                 </li>
@@ -130,7 +131,7 @@
                         <a class="nav-link <?= $active ?>" href="#" title="Quản lý user">
                             <i class="nav-icon text-sm fas fa-users"></i>
                             <p>
-                                Quản lý user
+                                Quản lý tài khoản
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -146,9 +147,7 @@
                             $active = "";
                             if ($act == 'info_admin') $active = "active";
                             ?>
-                            <li class="nav-item"><a class="nav-link <?= $active ?>" href="index.php?source=user&act=info_admin" title="Thông tin admin"><i class="nav-icon text-sm far fa-caret-square-right"></i>
-                                    <p>Thông tin admin</p>
-                                </a></li>
+                            
                             <?php if (isset($config['user']['admin']) && $config['user']['admin'] == true) {
                                 $active = "";
                                 if ($act == 'man_admin' || $act == 'add_admin' || $act == 'edit_admin') $active = "active"; ?>
@@ -165,13 +164,6 @@
                             <?php } ?>
                         </ul>
                     </li>
-                <!-- Thiết lập thông tin -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?source=setting&act=update" title="Thiết lập thông tin">
-                        <i class="nav-icon text-sm fas fa-cogs"></i>
-                        <p>Thiết lập thông tin</p>
-                    </a>
-                </li>
             </ul>
         </nav>
     </div>

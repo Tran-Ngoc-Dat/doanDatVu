@@ -56,35 +56,16 @@
                         <span>Đổi mật khẩu</span>
                     </a>
                 </li>
+                <div class="dropdown-divider"></div>
+                <li>
+                    <a href="index.php?source=setting&act=update&changepass=2" class="dropdown-item">
+                        <i class="fas fa-cogs"></i>
+                        <span>Thông tin website</span>
+                    </a>
+                </li>
             </ul>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="fas fa-bell"></i>
-                <span class="badge badge-danger"><?=$countNotify?></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow">
-                <span class="dropdown-item dropdown-header p-0">Thông báo</span>
-                <div class="dropdown-divider"></div>
-                <a href="index.php?source=contact&act=man" class="dropdown-item"><i class="fas fa-envelope mr-2"></i><span class="badge badge-danger mr-1"><?=count($contactNotify)?></span> Liên hệ</a>
-                <?php if(isset($config['order']['active']) && $config['order']['active'] == true) { ?>
-                    <div class="dropdown-divider"></div>
-                    <a href="index.php?source=order&act=man" class="dropdown-item"><i class="fas fa-shopping-bag mr-2"></i><span class="badge badge-danger mr-1"><?=count($orderNotify)?></span> Đơn hàng</a>
-                <?php } ?>
-                <?php if(!empty($commentProductNotify)) { foreach($commentProductNotify as $k => $v) { ?>
-                    <div class="dropdown-divider"></div>
-                    <a href="index.php?source=product&act=man&type=<?=$k?>&comment_status=new" class="dropdown-item"><i class="fas fa-comments mr-2"></i><span class="badge badge-danger mr-1"><?=$v['notify']?></span> Bình luận - <?=$v['title']?></a>
-                <?php } } ?>
-                <?php if(!empty($commentNewsNotify)) { foreach($commentNewsNotify as $k => $v) { ?>
-                    <div class="dropdown-divider"></div>
-                    <a href="index.php?source=news&act=man&type=<?=$k?>&comment_status=new" class="dropdown-item"><i class="fas fa-comments mr-2"></i><span class="badge badge-danger mr-1"><?=$v['notify']?></span> Bình luận - <?=$v['title']?></a>
-                <?php } } ?>
-                <?php if(!empty($newsletterNotify)) { foreach($newsletterNotify as $k => $v) { ?>
-                    <div class="dropdown-divider"></div>
-                    <a href="index.php?source=newsletter&act=man&type=<?=$k?>" class="dropdown-item"><i class="fas fa-mail-bulk mr-2"></i><span class="badge badge-danger mr-1"><?=$v['notify']?></span> <?=$v['title']?></a>
-                <?php } } ?>
-            </div>
-        </li>
+        
         <li class="nav-item d-sm-inline-block">
             <a href="index.php?source=user&act=logout" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i>Đăng xuất</a>
         </li>

@@ -40,12 +40,6 @@ $pageLink .= $tempLink;
 $sql = "select name, slug, id, photo, regular_price, sale_price, discount from product where id <> 0 $where and find_in_set('hienthi',status) $order ";
 $sqlCache = $sql . " ";
 $items = $d->rawQuery($sqlCache, $params);
-
-/* Count all data */
-// $countItems = count($cache->get($sql, $params, 'result', 7200));
-
-/* Get page result */
-// $pagingItems = $pagingAjax->getAllPageLinks($countItems, $pageLink, $eShow);
 ?>
 <?php if ($items) { ?>
 <?php foreach ($items as $k => $v) { ?>

@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
-
-
-    <div class="btn-opencart"><i class="fa-solid fa-cart-shopping"></i></div>
+    <div class="btn-opencart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="count-cart"><?=(!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0?></span>
+    </div>

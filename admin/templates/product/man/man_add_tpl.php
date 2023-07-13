@@ -15,11 +15,15 @@
     {
     	$colLeft = "col-xl-8";
     	$colRight = "col-xl-4";
+        $colLeft1 = "col-xl-7";
+    	$colRight1 = "col-xl-5";
     }
     else
     {
     	$colLeft = "col-12";
     	$colRight = "d-none";	
+        $colLeft1 = "col-12";
+    	$colRight1 = "d-none";	
     }
 ?>
 <!-- Content Header -->
@@ -51,14 +55,7 @@
         <?=$flash->getMessages('admin')?>
 
         <div class="row">
-            <div class="<?=$colLeft?>">
-                <?php
-                	if(isset($config['product']['slug']) && $config['product']['slug'] == true)
-	                {
-	                	$slugchange = ($act=='edit') ? 1 : 0;
-						include TEMPLATE.LAYOUT."slug.php";
-				    }
-			    ?>
+            <div class="<?=$colLeft1?>">
                 <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Nội dung <?=$config['product']['title_main']?></h3>
@@ -76,14 +73,27 @@
                                 </ul>
                             </div>
                             <div class="card-body card-article">
+                                <div class="form-group-category row">
+                                    <div class="form-group col-xl-12 col-sm-6">
+                                        <label class="d-block" for="id_list">Danh mục sản phẩm:</label>
+                                        <select name="data[id_category]" id="id_category" class="select2 w-100">
+                                            <option value="">Chọn danh mục sản phẩm</option>
+                                            <?php foreach($category as $v) { ?>
+                                            <option value="<?=$v['id']?>"
+                                                <?=($v['id'] == $item['id_category'] ? 'selected' : '')?>>
+                                                <?=$v['name']?>
+                                            </option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="tab-content" id="custom-tabs-three-tabContent-lang">
-								<div class="tab-pane fade show active" id="tabs-lang-vi"
-                                        role="tabpanel" aria-labelledby="tabs-lang">
+                                    <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel"
+                                        aria-labelledby="tabs-lang">
                                         <div class="form-group">
                                             <label for="name">Tiêu đề:</label>
-                                            <input type="text" class="form-control for-seo text-sm"
-                                                name="data[name]" id="name"
-                                                placeholder="Tiêu đề"
+                                            <input type="text" class="form-control for-seo text-sm" name="data[name]"
+                                                id="name" placeholder="Tiêu đề"
                                                 value="<?=(!empty($flash->has('name'))) ? $flash->get('name') : @$item['name']?>"
                                                 required>
                                         </div>
@@ -121,29 +131,15 @@
                     </div>
                 </div>
             </div>
-            <div class="<?=$colRight?>">
-            <div class="card card-primary card-outline text-sm">
-                    <div class="card-header">
-                        <h3 class="card-title">Danh mục <?=$config['product']['title_main']?></h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                    class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group-category row">
-                        <div class="form-group col-xl-12 col-sm-6">
-                                <label class="d-block" for="id_list">Danh mục cấp 1:</label>
-                                <select name="data[id_category]" id="id_category" class="select2 w-100">
-                                    <option value="">Chọn danh mục sản phẩm</option>
-                                    <?php foreach($category as $v) { ?>
-                                        <option value="<?=$v['id']?>" <?=($v['id'] == $item['id_category'] ? 'selected' : '')?> ><?=$v['name']?></option>
-                                    <?php }?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="<?=$colRight1?>">
+                <?php
+                	if(isset($config['product']['slug']) && $config['product']['slug'] == true)
+	                {
+	                	$slugchange = ($act=='edit') ? 1 : 0;
+						include TEMPLATE.LAYOUT."slug.php";
+				    }
+			    ?>
+
 
                 <?php if(isset($config['product']['images']) && $config['product']['images'] == true) { ?>
                 <div class="card card-primary card-outline text-sm">
@@ -168,127 +164,96 @@
                     </div>
                 </div>
                 <?php } ?>
+                <div class="card card-primary card-outline text-sm">
+                    <div class="card-header">
+                        <h3 class="card-title">Thông tin <?=$config['product']['title_main']?></h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                                    class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <?php $status_array = (!empty($item['status'])) ? explode(',', $item['status']) : array(); ?>
+                            <?php if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>
+                            <div class="form-group d-inline-block mb-2 mr-2">
+                                <label for="<?=$key?>-checkbox"
+                                    class="d-inline-block align-middle mb-0 mr-2"><?=$value?>:</label>
+                                <div class="custom-control custom-checkbox d-inline-block align-middle">
+                                    <input type="checkbox" class="custom-control-input <?=$key?>-checkbox"
+                                        name="status[<?=$key?>]" id="<?=$key?>-checkbox"
+                                        <?=(empty($status_array) && empty($item['id']) ? 'checked' : in_array($key, $status_array)) ? 'checked' : ''?>
+                                        value="<?=$key?>">
+                                    <label for="<?=$key?>-checkbox" class="custom-control-label"></label>
+                                </div>
+                            </div>
+                            <?php } } ?>
+                        </div>
+                        <div class="row">
+                            <?php if(isset($config['product']['sku']) && $config['product']['sku'] == true) { ?>
+                            <div class="form-group col-md-12">
+                                <label class="d-block" for="sku">Mã sản phẩm:</label>
+                                <input type="text" class="form-control text-sm" name="data[sku]" id="sku"
+                                    placeholder="Mã sản phẩm"
+                                    value="<?=(!empty($flash->has('sku'))) ? $flash->get('sku') : @$item['sku']?>">
+                            </div>
+                            <?php } ?>
+                            
+                            <?php if(isset($config['product']['regular_price']) && $config['product']['regular_price'] == true) { ?>
+                            <div class="form-group col-md-6">
+                                <label class="d-block" for="regular_price">Giá bán:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control format-price regular_price text-sm"
+                                        name="data[regular_price]" id="regular_price" placeholder="Giá bán"
+                                        value="<?=(!empty($flash->has('regular_price'))) ? $flash->get('regular_price') : @$item['regular_price']?>">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text"><strong>VNĐ</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <?php if(isset($config['product']['sale_price']) && $config['product']['sale_price'] == true) { ?>
+                            <div class="form-group col-md-6">
+                                <label class="d-block" for="sale_price">Giá mới:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control format-price sale_price text-sm"
+                                        name="data[sale_price]" id="sale_price" placeholder="Giá mới"
+                                        value="<?=(!empty($flash->has('sale_price'))) ? $flash->get('sale_price') : @$item['sale_price']?>">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text"><strong>VNĐ</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <?php if(isset($config['product']['discount']) && $config['product']['discount'] == true) { ?>
+                            <div class="form-group col-md-6">
+                                <label class="d-block" for="discount">Chiết khấu:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control discount text-sm" name="data[discount]"
+                                        id="discount" placeholder="Chiết khấu"
+                                        value="<?=(!empty($flash->has('discount'))) ? $flash->get('discount') : @$item['discount']?>"
+                                        maxlength="3" readonly>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text"><strong>%</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <div class="form-group col-md-6">
+                                <label class="d-block" for="inventory">Số lượng tồn kho:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control inventory text-sm" name="data[inventory]"
+                                        id="inventory" placeholder="Số lượng tồn kho"
+                                        value="<?=(!empty($flash->has('inventory'))) ? $flash->get('inventory') : @$item['inventory']?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card card-primary card-outline text-sm">
-            <div class="card-header">
-                <h3 class="card-title">Thông tin <?=$config['product']['title_main']?></h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                            class="fas fa-minus"></i></button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <?php $status_array = (!empty($item['status'])) ? explode(',', $item['status']) : array(); ?>
-                    <?php if(isset($config['product']['check'])) { foreach($config['product']['check'] as $key => $value) { ?>
-                    <div class="form-group d-inline-block mb-2 mr-2">
-                        <label for="<?=$key?>-checkbox"
-                            class="d-inline-block align-middle mb-0 mr-2"><?=$value?>:</label>
-                        <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input <?=$key?>-checkbox"
-                                name="status[<?=$key?>]" id="<?=$key?>-checkbox"
-                                <?=(empty($status_array) && empty($item['id']) ? 'checked' : in_array($key, $status_array)) ? 'checked' : ''?>
-                                value="<?=$key?>">
-                            <label for="<?=$key?>-checkbox" class="custom-control-label"></label>
-                        </div>
-                    </div>
-                    <?php } } ?>
-                </div>
-                <div class="row">
-                    <?php if(isset($config['product']['sku']) && $config['product']['sku'] == true) { ?>
-                    <div class="form-group col-md-4">
-                        <label class="d-block" for="sku">Mã sản phẩm:</label>
-                        <input type="text" class="form-control text-sm" name="data[sku]" id="sku"
-                            placeholder="Mã sản phẩm"
-                            value="<?=(!empty($flash->has('sku'))) ? $flash->get('sku') : @$item['sku']?>">
-                    </div>
-                    <?php } ?>
-                    <?php if(isset($config['product']['regular_price']) && $config['product']['regular_price'] == true) { ?>
-                    <div class="form-group col-md-4">
-                        <label class="d-block" for="regular_price">Giá bán:</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control format-price regular_price text-sm"
-                                name="data[regular_price]" id="regular_price" placeholder="Giá bán"
-                                value="<?=(!empty($flash->has('regular_price'))) ? $flash->get('regular_price') : @$item['regular_price']?>">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><strong>VNĐ</strong></div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php if(isset($config['product']['sale_price']) && $config['product']['sale_price'] == true) { ?>
-                    <div class="form-group col-md-4">
-                        <label class="d-block" for="sale_price">Giá mới:</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control format-price sale_price text-sm"
-                                name="data[sale_price]" id="sale_price" placeholder="Giá mới"
-                                value="<?=(!empty($flash->has('sale_price'))) ? $flash->get('sale_price') : @$item['sale_price']?>">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><strong>VNĐ</strong></div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php if(isset($config['product']['discount']) && $config['product']['discount'] == true) { ?>
-                    <div class="form-group col-md-4">
-                        <label class="d-block" for="discount">Chiết khấu:</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control discount text-sm" name="data[discount]" id="discount"
-                                placeholder="Chiết khấu"
-                                value="<?=(!empty($flash->has('discount'))) ? $flash->get('discount') : @$item['discount']?>"
-                                maxlength="3" readonly>
-                            <div class="input-group-append">
-                                <div class="input-group-text"><strong>%</strong></div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <div class="form-group col-md-4">
-                        <label class="d-block" for="inventory">Số lượng tồn kho:</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control inventory text-sm" name="data[inventory]" id="inventory"
-                                placeholder="Số lượng tồn kho"
-                                value="<?=(!empty($flash->has('inventory'))) ? $flash->get('inventory') : @$item['inventory']?>"
-                                >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card card-primary card-outline text-sm">
-                <div class="card-header">
-                    <h3 class="card-title">Bộ sưu tập <?= $config['product'][$type]['title_main'] ?></h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="filer-gallery" class="label-filer-gallery mb-3">Album hình: (<?= $config['product'][$type]['gallery'][$keyGallery]['img_type_photo'] ?>)</label>
-                        <input type="file" name="files[]" id="filer-gallery" multiple="multiple">
-                        <input type="hidden" class="col-filer" value="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
-                        <input type="hidden" class="act-filer" value="man">
-                        <input type="hidden" class="folder-filer" value="product">
-                    </div>
-                    <?php if (isset($gallery) && count($gallery) > 0) { ?>
-                        <div class="form-group form-group-gallery">
-                            <label class="label-filer">Album hiện tại:</label>
-                            <div class="action-filer mb-3">
-                                <a class="btn btn-sm bg-gradient-primary text-white check-all-filer mr-1"><i class="far fa-square mr-2"></i>Chọn tất cả</a>
-                                <button type="button" class="btn btn-sm bg-gradient-success text-white sort-filer mr-1"><i class="fas fa-random mr-2"></i>Sắp xếp</button>
-                                <a class="btn btn-sm bg-gradient-danger text-white delete-all-filer"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
-                            </div>
-                            <div class="alert my-alert alert-sort-filer alert-info text-sm text-white bg-gradient-info"><i class="fas fa-info-circle mr-2"></i>Có thể chọn nhiều hình để di chuyển</div>
-                            <div class="jFiler-items my-jFiler-items jFiler-row">
-                                <ul class="jFiler-items-list jFiler-items-grid row scroll-bar" id="jFilerSortable">
-                                    <?php foreach ($gallery as $v) echo $func->galleryFiler($v['numb'], $v['id'], $v['photo'], $v['namevi'], 'product', 'col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6'); ?>
-                                </ul>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
+
+
         <div class="card-footer text-sm">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check" disabled><i
                     class="far fa-save mr-2"></i>Lưu</button>

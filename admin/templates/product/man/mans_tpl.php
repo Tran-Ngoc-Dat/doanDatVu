@@ -24,12 +24,16 @@
 <section class="content">
     <div class="card-footer text-sm sticky-top">
     	<a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <div class="form-inline form-search d-inline-block align-middle ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?=(isset($_GET['keyword'])) ? $_GET['keyword'] : ''?>" onkeypress="doEnter(event,'keyword','<?=$linkMan?>')">
+        <div class="form-inline form-search d-inline-block align-middle ml-3" style="width:30%">
+            <div class="input-group input-group-sm input-group-button input-group-primary">
+                <input class="form-control form-control-navbar text-sm" type="search" id="keyword"
+                    placeholder="Tìm kiếm" aria-label="Tìm kiếm"
+                    value="<?= (isset($_GET['keyword'])) ? $_GET['keyword'] : '' ?>"
+                    onkeypress="doEnter(event,'keyword','<?= $linkMan ?>')">
                 <div class="input-group-append bg-primary rounded-right">
-                    <button class="btn btn-navbar text-white" type="button" onclick="onSearch('keyword','<?=$linkMan?>')">
-                        <i class="fas fa-search"></i>
+                    <button class="btn btn-navbar text-white btn btn-primary input-group-addon" type="button"
+                        onclick="onSearch('keyword','<?= $linkMan ?>')">
+                        Tìm kiếm
                     </button>
                 </div>
             </div>

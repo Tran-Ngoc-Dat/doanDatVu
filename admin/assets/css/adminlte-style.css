@@ -1,7 +1,7 @@
 /* Login */
-.login-box{width:320px;}
+.login-box{width: 450px;text-align: center;}
 .login-box .card .login-card-body{padding:30px 20px;border-radius:0.25rem;}
-.login-box .card .login-card-body .login-box-msg{color:#686f75;font-size:16px;padding-bottom:1rem;text-transform:capitalize;}
+.login-box .card .login-card-body .login-box-msg{color: #000;font-size: 28px;padding-bottom:1rem;text-transform:capitalize;}
 .login-box .card .login-card-body .input-group .form-control{border-right:1px solid #ced4da;}
 .login-box .card .login-card-body .input-group .form-control:focus{border-color:#80bdff!important;}
 .login-box .card .login-card-body .input-group .login-input-group-append .input-group-text{border:1px solid #ced4da!important;border-right:0px!important;border-top-left-radius:.25rem!important;border-bottom-left-radius:.25rem!important;}
@@ -133,7 +133,7 @@
 .main-header .navbar-nav .nav-item .dropdown-menu .dropdown-divider{margin:.25rem 0;}
 .main-header .navbar-nav .nav-item .dropdown-menu .dropdown-divider:last-child{display:none;}
 .main-header .navbar-nav .nav-item.nav-item-hello span{max-width:120px;padding-right:10px;}
-.main-header .navbar-nav .nav-item.nav-item-hello span.text-split{-webkit-line-clamp:1;}
+.main-header .navbar-nav .nav-item.nav-item-hello span.text-split{-webkit-line-clamp:1;color: #fff;}
 .main-header .navbar-nav .nav-item .nav-link .badge{vertical-align:top;margin-top:-5px;margin-left:-4px;}
 
 /* Table */

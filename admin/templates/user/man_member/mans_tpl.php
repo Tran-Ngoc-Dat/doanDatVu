@@ -21,13 +21,16 @@
 <section class="content">
     <div class="card-footer text-sm sticky-top">
         <a class="btn btn-sm bg-gradient-primary text-white" href="<?=$linkAdd?>" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
-        <!-- <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="<?=$linkDelete?>" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a> -->
-        <div class="form-inline form-search d-inline-block align-middle ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="<?=(isset($_GET['keyword'])) ? $_GET['keyword'] : ''?>" onkeypress="doEnter(event,'keyword','<?=$linkMan?>')">
+        <div class="form-inline form-search d-inline-block align-middle ml-3" style="width:30%">
+            <div class="input-group input-group-sm input-group-button input-group-primary">
+                <input class="form-control form-control-navbar text-sm" type="search" id="keyword"
+                    placeholder="Tìm kiếm" aria-label="Tìm kiếm"
+                    value="<?= (isset($_GET['keyword'])) ? $_GET['keyword'] : '' ?>"
+                    onkeypress="doEnter(event,'keyword','<?= $linkMan ?>')">
                 <div class="input-group-append bg-primary rounded-right">
-                    <button class="btn btn-navbar text-white" type="button" onclick="onSearch('keyword','<?=$linkMan?>')">
-                        <i class="fas fa-search"></i>
+                    <button class="btn btn-navbar text-white btn btn-primary input-group-addon" type="button"
+                        onclick="onSearch('keyword','<?= $linkMan ?>')">
+                        Tìm kiếm
                     </button>
                 </div>
             </div>
@@ -67,12 +70,15 @@
                                 <td class="align-middle">
                                     <a class="text-dark text-break" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="<?=$items[$i]['email']?>"><?=$items[$i]['email']?></a>
                                 </td>
-                                <td class="align-middle text-center">
-                                    <div class="custom-control custom-checkbox my-checkbox">
-                                        <input type="checkbox" class="custom-control-input show-checkbox" data-table="member" data-id="<?=$items[$i]['id']?>" <?=$items[$i]['status'] == 1 ? 'checked' : ''?>>
-                                        <label class="custom-control-label"></label>
-                                    </div>
-                                </td>
+                                <?php $status_array = (!empty($items[$i]['status'])) ? explode(',', $items[$i]['status']) : array(); ?>
+                                <?php if(isset($config['user']['check_member'])) { foreach($config['user']['check_member'] as $key => $value) { ?>
+                                    <td class="align-middle text-center">
+                                        <div class="custom-control custom-checkbox my-checkbox">
+                                            <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-<?=$key?>-<?=$items[$i]['id']?>" data-table="member" data-id="<?=$items[$i]['id']?>" data-attr="<?=$key?>" <?=(in_array($key, $status_array)) ? 'checked' : ''?>>
+                                            <label for="show-checkbox-<?=$key?>-<?=$items[$i]['id']?>" class="custom-control-label"></label>
+                                        </div>
+                                    </td>
+                                <?php } } ?>
                                 <td class="align-middle text-center text-md text-nowrap">
                                     <a class="text-primary mr-2" href="<?=$linkEdit?>&id=<?=$items[$i]['id']?>" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
                                     <a class="text-danger" id="delete-item" data-url="<?=$linkDelete?>&id=<?=$items[$i]['id']?>" title="Xóa"><i class="fas fa-trash-alt"></i></a>
