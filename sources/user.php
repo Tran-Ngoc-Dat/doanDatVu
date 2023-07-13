@@ -146,7 +146,7 @@ function loginMember()
         $func->redirect($configBase . "account/dang-nhap");
     }
 
-    $row = $d->rawQueryOne("select id, password, username, phone, address, email, fullname from #_user where role = 0 and username = ? limit 0,1", array($username));
+    $row = $d->rawQueryOne("select id, password, username, phone, address, email, fullname from #_user where status ='hienthi' and role = 0 and username = ? limit 0,1", array($username));
 
     if (!empty($row)) {
         if ($row['password'] == $passwordMD5) {
@@ -254,7 +254,7 @@ function signupMember()
     $data['phone'] = $phone;
     $data['address'] = $address;
     $data['birthday'] = $birthday;
-    $data['status'] = 1;
+    $data['status'] = 'hienthi';
     $data['role'] = 0;
 
     if ($d->insert('user', $data)) {

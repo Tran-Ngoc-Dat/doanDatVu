@@ -5125,6 +5125,7 @@ a.slideshow-image.scale-img img {
 .btn-opencart i {
 	font-size: 22px;
 	color: #fff;
+	position: relative;
 }
 
 .btn-opencart {
@@ -5140,6 +5141,8 @@ a.slideshow-image.scale-img img {
 	bottom: 320px;
 	cursor: pointer;
 }
+.btn-opencart span {color: #000;background: yellow;position: absolute;top: -5px;width: 20px;height: 20px;right: 0px;border-radius: 50%;font-size: 12px;font-weight: 600;display: flex;justify-content: center;align-items: center;} 
+
 
 
 .full-row {
@@ -5188,7 +5191,7 @@ label {
 	height: 48px;
 	font-size: 13px !important;
 	padding-left: 10px;
-	padding-right: 0;
+	padding-right: 10px;
 	letter-spacing: 1px;
 	border-radius: 0;
 }

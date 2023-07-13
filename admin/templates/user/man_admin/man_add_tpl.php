@@ -73,15 +73,7 @@
 						<input type="text" class="form-control text-sm" name="data[address]" id="address" placeholder="Địa chỉ" value="<?=(!empty($flash->has('address'))) ? $flash->get('address') : @$item['address']?>" required>
 					</div>
 				</div>
-				<div class="form-group">
-				<div class="form-group d-inline-block mb-2 mr-2">
-				            <label for="<?=$key?>-checkbox" class="d-inline-block align-middle mb-0 mr-2">Kích hoạt :</label>
-				            <div class="custom-control custom-checkbox d-inline-block align-middle">
-				                <input type="checkbox" class="custom-control-input" name="data[status]" id="status" <?=@$item['status'] == 1 ? "checked" : ""?> value="<?@$item['status']?>">
-				                <label class="custom-control-label"></label>
-				            </div>
-				        </div>
-				</div>
+				
             </div>
         </div>
         <div class="card-footer text-sm">
