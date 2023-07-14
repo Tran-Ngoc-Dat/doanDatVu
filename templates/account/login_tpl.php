@@ -29,7 +29,7 @@
                     <div class="invalid-feedback">Vui lòng nhập mật khẩu</div> 
             </div>
             <div class="forget-password d-flex align-items-center justify-content-between p-0">
-                <a class="" href="#">Quên mật khẩu</a>
+                <a class="" href="quen-mat-khau">Quên mật khẩu</a>
                 <a class="" href="dang-ky">Đăng ký</a>
             </div>
             <div class="button-user d-flex align-items-center justify-content-between">

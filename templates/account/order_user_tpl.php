@@ -70,10 +70,10 @@
             <td><?=$func->formatMoney($v['total_price']);?></td>
             <td><?=date('d/m/Y',$v['date_created']);?></td>
             <td>
-                <?php if(isset($v['order_status']) && $v['order_status'] < 3){?>
+                <?php if(isset($v['order_status']) && $v['order_status'] < 2){?>
                     <a href="huy-don-hang?id=<?=$v['id']?>" class="btn btn-danger">Hủy</a>
                 <?php } ?>
-                <?php if(isset($v['order_status']) && $v['order_status'] > 3) { ?>
+                <?php if(isset($v['order_status']) && $v['order_status'] > 2) { ?>
                     <a class="btn btn-secondary">Hủy</a>
                  <?php } ?>
             </td>

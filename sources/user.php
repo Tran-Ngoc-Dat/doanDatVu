@@ -21,6 +21,13 @@ switch ($action) {
         if (!empty($_POST['register-user'])) signupMember();
         break;
 
+    case 'quen-mat-khau':
+        $titleMain = 'Quên mật khẩu';
+        $template = "account/forgot_password";
+        if(!empty($_SESSION[$loginMember]['active'])) $func->transfer("Trang không tồn tại",$configBase, false);
+        if(!empty($_POST['forgot-password'])) forgotPasswordMember();
+        break;
+
     case 'thong-tin-ca-nhan':
         $titleMain = "Thông tin cá nhân";
         $template = "account/info";
@@ -182,83 +189,186 @@ function signupMember()
 {
     global $d, $func, $flash, $configBase, $config,$type;
    
-    /* Data */
-    $message = '';
-    $response = array();
-    $username = (!empty($_POST['username'])) ? htmlspecialchars($_POST['username']) : '';
-    $password = (!empty($_POST['password'])) ? $_POST['password'] : '';
-    $passwordMD5 = md5($password);
-    $repassword = (!empty($_POST['repassword'])) ? $_POST['repassword'] : '';
-    $fullname = (!empty($_POST['fullname'])) ? htmlspecialchars($_POST['fullname']) : '';
-    $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
-    $phone = (!empty($_POST['phone'])) ? htmlspecialchars($_POST['phone']) : 0;
-    $address = (!empty($_POST['address'])) ? htmlspecialchars($_POST['address']) : '';
-    $birthday = (!empty($_POST['birthday'])) ? htmlspecialchars($_POST['birthday']) : '';
-    $file_name = $func->uploadName($_FILES['file']["name"]);
-    $photo = $func->uploadImage("file", $config['user'][$type]['img_type'], "../upload/user/", $file_name);
+    if (!empty($_POST['register-user'] != "")) {
+        /* Data */
+        $message = '';
+        $response = array();
+        $username = (!empty($_POST['username'])) ? htmlspecialchars($_POST['username']) : '';
+        $password = (!empty($_POST['password'])) ? $_POST['password'] : '';
+        $passwordMD5 = md5($password);
+        $repassword = (!empty($_POST['repassword'])) ? $_POST['repassword'] : '';
+        $fullname = (!empty($_POST['fullname'])) ? htmlspecialchars($_POST['fullname']) : '';
+        $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
+        $phone = (!empty($_POST['phone'])) ? htmlspecialchars($_POST['phone']) : 0;
+        $address = (!empty($_POST['address'])) ? htmlspecialchars($_POST['address']) : '';
+        $birthday = (!empty($_POST['birthday'])) ? htmlspecialchars($_POST['birthday']) : '';
+        $file_name = $func->uploadName($_FILES['file']["name"]);
+        $photo = $func->uploadImage("file", $config['user'][$type]['img_type'], "../upload/user/", $file_name);
 
-    /* Valid data */
-    
-    if (!empty($username)) {
-        if (!$func->isAlphaNum($username)) {
+        /* Valid data */
+        if(empty($fullname))
+        {
+            $response['messages'][] = 'Họ tên không được trống';
+        }
+        if (!empty($username)) {
+            if (!$func->isAlphaNum($username)) {
+                $response['messages'][] = 'Tài khoản chỉ được nhập chữ thường và số (chữ thường không dấu, ghi liền nhau, không khoảng trắng)';
+            }
+
+            if ($func->checkAccount($username, 'username', 'user')) {
+                $response['messages'][] = 'Tài khoản đã tồn tại';
+            }
+        }
+
+        if (!empty($password) && empty($repassword)) {
+            $response['messages'][] = 'Xác nhận mật khẩu không được trống';
+        }
+
+        if (!empty($password) && !empty($repassword) && !$func->isMatch($password, $repassword)) {
+            $response['messages'][] = 'Mật khẩu không trùng khớp';
+        }
+
+        if (!empty($email)) {
+            if (!$func->isEmail($email)) {
+                $response['messages'][] = 'Email không hợp lệ';
+            }
+
+            if ($func->checkAccount($email, 'email', 'user')) {
+                $response['messages'][] = 'Email đã tồn tại';
+            }
+        }
+       
+        if (!empty($phone) && !$func->isPhone($phone)) {
+            $response['messages'][] = 'Số điện thoại không hợp lệ';
+        }
+        
+        if (!empty($response)) {
+            /* Errors */
+            $response['status'] = 'danger';
+            $message = base64_encode(json_encode($response));
+            $flash->set('message', $message);
+            $func->redirect($configBase . "account/dang-ky");
+        }
+
+        /* Save data */
+        $data['fullname'] = $fullname;
+        $data['username'] = $username;
+        $data['password'] = md5($password);
+        $data['email'] = $email;
+        $data['phone'] = $phone;
+        $data['address'] = $address;
+        $data['birthday'] = $birthday;
+        $data['status'] = 'hienthi';
+        $data['role'] = 0;
+
+        if ($d->insert('user', $data)) {
+        require 'vendor/autoload.php';
+
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'herrytran147@gmail.com';                     //SMTP username
+            $mail->Password   = 'bixioushqugaskph';                               //SMTP password
+            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+            $mail->Port       = 587;
+            $mail->CharSet = 'utf-8';                             //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('from@example.com', 'Mailer');
+            $mail->addAddress($email);     //Add a recipient
+
+            // Body
+            $body = '<table border="0" width="100%">';
+                        $body .= '
+                    <tr>
+                        <th align="left" colspan="2">
+                        <table width="100%">
+                        <tr>
+                        <td><font size="4">Đăng ký tài khoản từ website <a href="http://'.$configBase.'">'.$configBase.'</a></font> 
+                        </td>
+                        </table>
+                        </th>
+                    </tr>
+                    <div>Chúc mừng bạn đã đăng ký tài khoản thành công</div>';
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Đăng ký tài khoản thành công';
+            $mail->Body = $body;
+
+            $mail->send();
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+            $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
+        } else {
+            $func->transfer("Đăng ký thành viên thất bại. Vui lòng thử lại sau.", $configBase, false);
+        }
+    } else {
+        $func->transfer("Trang không tồn tại", $configBase, false);
+    }
+}
+function forgotPasswordMember(){
+    global $d, $setting, $emailer, $func, $flash, $loginMember, $configBase;
+
+    if (!empty($_POST['forgot-password'] != "")) {
+        /* Data */
+        $message = '';
+        $response = array();
+        $username = (!empty($_POST['username'])) ? htmlspecialchars($_POST['username']) : '';
+        $email = (!empty($_POST['email'])) ? htmlspecialchars($_POST['email']) : '';
+        $newpass = substr(md5(rand(0,999)*time()), 15, 6);
+        $newpassMD5 = md5($newpass);
+
+        /* Valid data */
+        if(empty($username))
+        {
+            $response['messages'][] = 'Tài khoản không được trống';
+        }
+        if(!empty($username) && !$func->isAlphaNum($username))
+        {
             $response['messages'][] = 'Tài khoản chỉ được nhập chữ thường và số (chữ thường không dấu, ghi liền nhau, không khoảng trắng)';
         }
-
-        if ($func->checkAccount($username, 'username', 'user')) {
-            $response['messages'][] = 'Tài khoản đã tồn tại';
+        if(empty($email))
+        {
+            $response['messages'][] = 'Email không được trống';
         }
-    }
-
-    if (!empty($password) && empty($repassword)) {
-        $response['messages'][] = 'Xác nhận mật khẩu không được trống';
-    }
-
-    if (!empty($password) && !empty($repassword) && !$func->isMatch($password, $repassword)) {
-        $response['messages'][] = 'Mật khẩu không trùng khớp';
-    }
-
-    if (!empty($email)) {
-        if (!$func->isEmail($email)) {
+        if(!empty($email) && !$func->isEmail($email))
+        {
             $response['messages'][] = 'Email không hợp lệ';
         }
-
-        if ($func->checkAccount($email, 'email', 'user')) {
-            $response['messages'][] = 'Email đã tồn tại';
+        if(!empty($username) && !empty($email))
+        {
+            $row = $d->rawQueryOne("select id from user where role = 0 and username = ? and email = ? limit 0,1",array($username,$email));
+            if(empty($row))
+            {
+                $response['messages'][] = 'Tên đăng nhập hoặc/và email không tồn tại';
+            }
         }
-    }
 
-    if (!empty($phone) && !$func->isPhone($phone)) {
-        $response['messages'][] = 'Số điện thoại không hợp lệ';
-    }
-    
-    if (!empty($response)) {
-        /* Flash data */
-        $flash->set('fullname', $fullname);
-        $flash->set('username', $username);
-        $flash->set('email', $email);
-        $flash->set('phone', $phone);
-        $flash->set('address', $address);
+        if(!empty($response))
+        {
+            $response['status'] = 'danger';
+            $message = base64_encode(json_encode($response));
+            $flash->set('message', $message);
+            $func->redirect($configBase."account/quen-mat-khau");
+        }
+        /* Cập nhật mật khẩu mới */
+            $data['password'] = $newpassMD5;
+            $d->where('username', $username);
+            $d->where('email', $email);
+            $d->update('user',$data);
 
-        /* Errors */
-        $response['status'] = 'danger';
-        $message = base64_encode(json_encode($response));
-        $flash->set('message', $message);
-        $func->redirect($configBase . "account/dang-ky");
-    }
-
-    /* Save data */
-    $data['fullname'] = $fullname;
-    $data['username'] = $username;
-    $data['password'] = md5($password);
-    $data['email'] = $email;
-    $data['phone'] = $phone;
-    $data['address'] = $address;
-    $data['birthday'] = $birthday;
-    $data['status'] = 'hienthi';
-    $data['role'] = 0;
-
-    if ($d->insert('user', $data)) {
-    require 'vendor/autoload.php';
+        /* Lấy thông tin người dùng */
+        $row = $d->rawQueryOne("select * from user where role = 0 and username = ? limit 0,1",array($username));
+        
+        require 'vendor/autoload.php';
 
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
@@ -286,26 +396,32 @@ function signupMember()
 					<th align="left" colspan="2">
 					<table width="100%">
 					<tr>
-					<td><font size="4">Đăng ký tài khoản từ website <a href="http://'.$configUrl.'">'.$configUrl.'</a></font> 
+					<td><font size="4">Cấp lại mật khẩu từ website <a href="http://'.$configBase.'">'.$configBase.'</a></font> 
 					</td>
+                    </tr>
+                    <tr>
+                    <td><span style="font-size:3">Mật khẩu mới của bạn là: '.$newpass.'</span><br></td>
+                    </tr>
 					</table>
 					</th>
-				</tr>
-                <div>Chúc mừng bạn đã đăng ký tài khoản thành công</div>';
+				</tr>';
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Đăng ký tài khoản thành công';
+        $mail->Subject = 'Cấp lại mật khẩu';
         $mail->Body = $body;
-
         $mail->send();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    }
-        $func->transfer("Đăng ký thành viên thành công. Vui lòng đăng nhập", $configBase . "account/dang-nhap");
+    } 
+        unset($_SESSION[$loginMember]);
+        setcookie('login_member_id',"",-1,'/');
+		setcookie('login_member_session',"",-1,'/');
+		$func->transfer("Cấp lại mật khẩu thành công. Vui lòng kiểm tra email: ".$email, $configBase);
     } else {
-        $func->transfer("Đăng ký thành viên thất bại. Vui lòng thử lại sau.", $configBase, false);
+        $func->transfer("Trang không tồn tại", $configBase, false);
     }
+
 }
 function logoutMember()
 {

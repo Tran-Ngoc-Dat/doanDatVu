@@ -4745,6 +4745,7 @@ coccocgrammar {
 	width: 77%;
 	box-shadow: 0px 0px 5px rgb(0 0 0 / 12%);
 	padding: 0 5px;
+	margin: 0px auto;
 }
 
 .items-info {
@@ -5025,6 +5026,10 @@ table-criteria {border: 1px solid #000;margin-bottom: 10px;}
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 10px;
 }
+.grid-products.grid-3 {
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
+}
 
 .slick-news {
 	display: none;
@@ -5059,8 +5064,6 @@ a.slideshow-image.scale-img img {
 
 .box-filter {
 	background: #fff;
-	padding: 10px;
-	border: 1px solid #ccc;
 	margin-top: 60px;
 }
 
@@ -5069,43 +5072,38 @@ a.slideshow-image.scale-img img {
 .filter-items-name {}
 
 .filter-items-name {
-	font-weight: 700;
-	text-transform: uppercase;
 	font-size: 16px;
-	color: #000;
+	font-weight: 500;
+	padding: 10px 20px;
+	color: #fff;
+	background: var(--main-color);
 	position: relative;
-	padding-bottom: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
 }
 
-.filter-items-name:before {
-	content: '';
-	position: absolute;
-	background: #1d1d1d;
-	width: 40px;
-	height: 2px;
-	bottom: 0;
-	left: 0;
-}
 
 .name-filter {
 	font-size: 14px;
 }
 
 .check-box {
-	width: 18px;
-	height: 18px;
+	width: 16px;
+	height: 16px;
 	border: 1px solid #ccc;
 }
 
 .items-filter-sort,
 .items-filter-child {
 	margin-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #ccc;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	cursor: pointer;
 }
 
 .filter-items .items-filter-child:last-child {
@@ -5117,7 +5115,7 @@ a.slideshow-image.scale-img img {
 }
 
 .check-box i {
-	line-height: 25px;
+	line-height: 16px;
 	text-align: center;
 	display: block;
 }

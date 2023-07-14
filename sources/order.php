@@ -35,6 +35,7 @@
                 $data_donhang['id_user'] = $userDetail['id'];
                 $data_donhang['email'] = $email;
                 $data_donhang['phone'] = $phone;
+                $data_donhang['code'] = $code;
                 $data_donhang['address'] = $address;
                 $data_donhang['notes'] = $requirements;
                 $data_donhang['total_price'] = $total_price;
@@ -104,77 +105,79 @@
                     $mail->addAddress($email);               //Name is optional
                     
                     // Body
-                    $body = '<table border="0" width="100%">';
-                $body .= '
+            $body = '<table border="0" width="100%">';
+            $body .= '
+                    <tr>
+                        <th align="left" colspan="2">
+                        <table width="100%">
                         <tr>
-                            <th align="left" colspan="2">
-                            <table width="100%">
-                            <tr>
-                            <td><font size="4">Thông tin đặt hàng từ website <a href="http://'.$configUrl.'">'.$configUrl.'</a></font> 
-                            </td>
-                            </table>
-                            
-                            </th>
-                        </tr>
-                        <tr>
-                            <th width="30%" align="left">Họ tên :</th>
-                            <td>&nbsp; '.$fullname.'</td>
-                        </tr>
+                        <td><font size="4">Thông tin đặt hàng từ website <a href="http://'.$configUrl.'">'.$configUrl.'</a></font> 
+                        </td>
+                        </table>
                         
-                        <tr>
-                            <th align="left">Email :</th>
-                            <td>&nbsp; '.$email.'</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Điện thoại :</th>
-                            <td>&nbsp; '.$phone.'</td>
-                        </tr>
-                        <tr>
-                            <th align="left">Địa chỉ:</th>
-                            <td>&nbsp; '.$address.'</td>
-                        </tr>
-                        
-                        <tr>
-                            <th align="left">Nội dung :</th>
-                            <td >&nbsp; '.$requirements.'</td>
-                        </tr>
-                        <tr>
-                            <th align="left" colspan="2">&nbsp;</th>
-                        </tr>
-                        ';
-                $body .= '</table>';
-          
-        
-                $body.='<table border="0" cellpadding="5px" cellspacing="1px" style="font-size:12px; background:#FFF; width:100%;">';
-        
-        
-                    if(is_array($_SESSION['cart']))
-                    {
-                        $body.='<tr style="background:#ff0000; font-weight:bold; color:#FFF; border-left:1px solid #CCC; border-right:1px solid #CCC;"><th style="padding:5px; width:5%; text-align:center;">STT</th><th style="padding:5px; width:10%; text-align:center;">Mã đơn hàng</th><th style="padding:5px; width:45%; text-align:center;">Sản phẩm</th><th style="padding:5px; width:15%; text-align:center;">Giá</th><th style="padding:5px; width:10%; text-align:center;">Số lượng</th><th style="padding:5px; width:15%; text-align:center;">Thành tiền</th></tr>';
-                        $max=count($_SESSION['cart']);
-                        for($i=0;$i<$max;$i++){
-                            $pid=$_SESSION['cart'][$i]['productid'];
-                            $q=$_SESSION['cart'][$i]['qty'];
-                            $pDetail = $d->rawQueryOne("select * from #_product where id = ? limit 0,1", array($pid));
-                            if($q==0) continue;
-                            $body.='<tr style="text-align:center;><td>'.($i+1).'</td>';
-                            $body.='	<p><a href="http://'.$configUrl.$pDetail['slug'].'" target="_blank">'.$pDetail['name'].'</a></p>';
-                            $body.='</td>';
-                            $body.='<td>'.number_format($pDetail['sale_price'],0, ',', '.').'&nbsp;đ</td>';
-                            $body.='<td>'.$q.'</td>';                 
-                            $body.='<td>'.number_format($pDetail['sale_price']*$q,0, ',', '.') .'&nbsp;đ</td>
-                            </tr>';
-                        }
-                        $body.='<tr><td colspan="6">
-                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                            Tổng giá trị đơn hàng: '.$total_price.'
-                         </table>
-                        </td></tr>';
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="30%" align="left">Họ tên :</th>
+                        <td>&nbsp; '.$fullname.'</td>
+                    </tr>
+                    
+                    <tr>
+                        <th align="left">Email :</th>
+                        <td>&nbsp; '.$email.'</td>
+                    </tr>
+                    <tr>
+                        <th align="left">Điện thoại :</th>
+                        <td>&nbsp; '.$phone.'</td>
+                    </tr>
+                    <tr>
+                        <th align="left">Địa chỉ:</th>
+                        <td>&nbsp; '.$address.'</td>
+                    </tr>
+                    
+                    <tr>
+                        <th align="left">Nội dung :</th>
+                        <td >&nbsp; '.$requirements.'</td>
+                    </tr>
+                    <tr>
+                        <th align="left" colspan="2">&nbsp;</th>
+                    </tr>
+                    ';
+            $body .= '</table>';
+      
+    
+            $body.='<table border="0" cellpadding="5px" cellspacing="1px" style="font-size:12px; background:#FFF; width:100%;">';
+    
+    
+                if(is_array($_SESSION['cart']))
+                {
+                    $body.='<tr style="background:#ff0000; font-weight:bold; color:#FFF; border-left:1px solid #CCC; border-right:1px solid #CCC;"><th style="padding:5px; width:5%; text-align:center;">STT</th><th style="padding:5px; width:45%; text-align:center;">Sản phẩm</th><th style="padding:5px; width:15%; text-align:center;">Giá</th><th style="padding:5px; width:10%; text-align:center;">Số lượng</th><th style="padding:5px; width:15%; text-align:center;">Thành tiền</th></tr>';
+                    $max=count($_SESSION['cart']);
+                    for($i=0;$i<$max;$i++){
+                        $pid=$_SESSION['cart'][$i]['productid'];
+                        $q=$_SESSION['cart'][$i]['qty'];
+                        $pDetail = $d->rawQueryOne("select * from #_product where id = ? limit 0,1", array($pid));
+    
+                        if($q==0) continue;
+                        $body.='<tr><td>'.($i+1).'</td>';
+                        $body.='<td>';
+                        $body.='	<p><a href="http://'.$configUrl.$pDetail['slug'].'" target="_blank">'.$pDetail['name'].'</a></p>';
+                        $body.='</td>';
+                        $body.='<td>'.number_format($pDetail['sale_price'],0, ',', '.').'&nbsp;đ</td>';
+                        $body.='<td>'.$q.'</td>';                 
+                        $body.='<td>'.number_format($pDetail['sale_price']*$q,0, ',', '.') .'&nbsp;đ</td>
+                        </tr>';
                     }
-                    else{
-                        $body.='<tr bgColor="#FFFFFF"><td>There are no items in your shopping cart!</td>';
-                    }
-               $body.=' </table> '; 
+                    $body.='<tr><td colspan="6">
+                      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                        Tổng giá trị đơn hàng: '.$total_price.'
+                     </table>
+                    </td></tr>';
+                }
+                else{
+                    $body.='<tr bgColor="#FFFFFF"><td>There are no items in your shopping cart!</td>';
+                }
+           $body.=' </table> '; 
         
                     //Content
                     $mail->isHTML(true);                                  //Set email format to HTML
