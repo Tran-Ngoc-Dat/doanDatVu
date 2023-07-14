@@ -34,31 +34,32 @@
             <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
         </div>
         <div class="form-group mb-3">
-            <label class="label" for="name">HỌ TÊN *</label>
+            <label class="label" for="name">Họ tên *</label>
             <input type="text" class="form-control text-sm" id="fullname" name="fullname" placeholder="Nhập họ tên" required="">
             <div class="invalid-feedback">Vui lòng nhập họ tên</div>
         </div>
         <div class="form-group mb-3">
-            <label class="label" for="name">NGÀY SINH *</label>
+            <label class="label" for="name">Email *</label>
+            <input type="email" class="form-control text-sm" id="email" name="email" placeholder="Nhập email" required="">
+            <div class="invalid-feedback">Vui lòng nhập email</div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="label" for="name">Ngày sinh *</label>
             <input type="date" class="form-control text-sm" id="birthday" name="birthday" placeholder="Nhập họ tên" required="">
             <div class="invalid-feedback">Vui lòng nhập ngày sinh</div>
         </div>
 
         <div class="form-group mb-3">
-            <label class="label" for="name">SỐ ĐIỆN THOẠI *</label>
+            <label class="label" for="name">Số điện thoại *</label>
             <input type="number" class="form-control text-sm" id="phone" name="phone" placeholder="Nhập số điện thoại" required="">
             <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
         </div>
         <div class="form-group mb-3">
-            <label class="label" for="name">ĐỊA CHỈ *</label>
+            <label class="label" for="name">Địa chỉ *</label>
             <input type="text" class="form-control text-sm" id="address" name="address" placeholder="Nhập địa chỉ" required="">
             <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
         </div>
-        <div class="form-group mb-3">
-            <label class="label" for="name">EMAIL *</label>
-            <input type="email" class="form-control text-sm" id="email" name="email" placeholder="Nhập email" required="">
-            <div class="invalid-feedback">Vui lòng nhập email</div>
-        </div>
+        
         <!-- <div class="form-group mb-3">
             <label class="label" for="name">PHOTO *</label>
             <input type="file" name="file" id="file-zone">
