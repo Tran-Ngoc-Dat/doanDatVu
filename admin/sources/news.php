@@ -32,11 +32,11 @@
 		global $d, $func, $comment, $strUrl, $curPage, $items, $paging, $type;
 
 		$where = "";
-		// if(isset($_REQUEST['keyword']))
-		// {
-		// 	$keyword = htmlspecialchars($_REQUEST['keyword']);
-		// 	$where .= " and (name LIKE '%$keyword%' or nameen LIKE '%$keyword%')";
-		// }
+		if(isset($_REQUEST['keyword']))
+		{
+			$keyword = htmlspecialchars($_REQUEST['keyword']);
+			$where .= " and (name LIKE '%$keyword%' or name LIKE '%$keyword%')";
+		} 
 
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;

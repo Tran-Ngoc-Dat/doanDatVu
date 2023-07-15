@@ -422,16 +422,16 @@
 
 		$where = "";
 
-		// if(isset($_REQUEST['keyword']))
-		// {
-		// 	$keyword = htmlspecialchars($_REQUEST['keyword']);
-		// 	$where .= " and (name LIKE '%$keyword%' or nameen LIKE '%$keyword%')";
-		// }
+		if(isset($_REQUEST['keyword']))
+		{
+			$keyword = htmlspecialchars($_REQUEST['keyword']);
+			$where .= " and (name LIKE '%$keyword%' or name LIKE '%$keyword%')";
+		} 
 
 		$perPage = 10;
 		$startpoint = ($curPage * $perPage) - $perPage;
 		$limit = " limit ".$startpoint.",".$perPage;
-		$sql = "select * from category where id > 0 order by id desc $limit";
+		$sql = "select * from category where id > 0 $where order by id desc $limit";
 		$items = $d->rawQuery($sql);
 		$sqlNum = "select count(*) as 'num' from category where id > 0 $where order by id desc";
 		$count = $d->rawQueryOne($sqlNum);
